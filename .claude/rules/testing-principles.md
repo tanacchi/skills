@@ -1,0 +1,7 @@
+# Testing Principles
+
+- risk が高い behavior から test する。
+- unit, integration, contract, E2E の責務を分ける。
+- implementation detail より user-visible behavior を見る。
+- flaky test を増やさない。
+- test gap は隠さず summary に書く。
