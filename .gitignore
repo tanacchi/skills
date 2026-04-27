@@ -2,6 +2,7 @@
 .env
 .env.*
 *.log
+GUIDE.md
 node_modules/
 apm_modules/
 .agents/skills/

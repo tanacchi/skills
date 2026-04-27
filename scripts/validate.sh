@@ -23,6 +23,17 @@ require_file apm.yml
 require_file .codex/instructions.md
 require_file scripts/install.sh
 
+if command -v rg >/dev/null 2>&1; then
+  if rg -n '(/[U]sers/|/[h]ome/)' . --hidden -g '!/.git/**' -g '!apm_modules/**' >/tmp/skills-local-paths.$$; then
+    while IFS= read -r match; do
+      fail "machine-specific absolute path found: $match"
+    done </tmp/skills-local-paths.$$
+  fi
+  rm -f /tmp/skills-local-paths.$$
+else
+  printf "info: rg not installed; skipping machine-specific path check\n"
+fi
+
 if [ ! -L "skills" ]; then
   fail "skills must be a symlink to .apm/skills"
 else
