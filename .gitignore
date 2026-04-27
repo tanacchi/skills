@@ -1,0 +1,12 @@
+.DS_Store
+.env
+.env.*
+*.log
+GUIDE.md
+node_modules/
+apm_modules/
+.agents/skills/
+.claude/skills/
+.cursor/skills/
+.gemini/skills/
+.opencode/skills/

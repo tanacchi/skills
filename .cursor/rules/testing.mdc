@@ -1,0 +1,6 @@
+---
+description: Testing principles for this agent skills repository
+alwaysApply: true
+---
+
+Test behavior and contracts rather than implementation details. Keep validation stable and fast. Document any test gap in the final response.

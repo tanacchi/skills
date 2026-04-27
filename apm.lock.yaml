@@ -1,0 +1,84 @@
+lockfile_version: '1'
+generated_at: '2026-04-27T05:17:26.777928+00:00'
+dependencies: []
+local_deployed_files:
+- .agents/skills/bff-api-design
+- .agents/skills/code-review
+- .agents/skills/creating-prs-from-diffs
+- .agents/skills/frontend-implementation
+- .agents/skills/incident-triage
+- .agents/skills/iterating-pr-quality
+- .agents/skills/optimizing-agent-prompts
+- .agents/skills/refactoring
+- .agents/skills/testing-strategy
+- .claude/commands/debug-issue.md
+- .claude/commands/write-rfc.md
+- .claude/rules/engineering-principles.md
+- .claude/rules/security-principles.md
+- .claude/rules/testing-principles.md
+- .claude/skills/bff-api-design
+- .claude/skills/code-review
+- .claude/skills/creating-prs-from-diffs
+- .claude/skills/frontend-implementation
+- .claude/skills/incident-triage
+- .claude/skills/iterating-pr-quality
+- .claude/skills/optimizing-agent-prompts
+- .claude/skills/refactoring
+- .claude/skills/testing-strategy
+- .cursor/rules/engineering-principles.mdc
+- .cursor/rules/security-principles.mdc
+- .cursor/rules/testing-principles.mdc
+- .cursor/skills/bff-api-design
+- .cursor/skills/code-review
+- .cursor/skills/creating-prs-from-diffs
+- .cursor/skills/frontend-implementation
+- .cursor/skills/incident-triage
+- .cursor/skills/iterating-pr-quality
+- .cursor/skills/optimizing-agent-prompts
+- .cursor/skills/refactoring
+- .cursor/skills/testing-strategy
+- .gemini/commands/debug-issue.toml
+- .gemini/commands/implement-feature.toml
+- .gemini/commands/refactor-safely.toml
+- .gemini/commands/review-pr.toml
+- .gemini/commands/write-rfc.toml
+- .gemini/skills/bff-api-design
+- .gemini/skills/code-review
+- .gemini/skills/creating-prs-from-diffs
+- .gemini/skills/frontend-implementation
+- .gemini/skills/incident-triage
+- .gemini/skills/iterating-pr-quality
+- .gemini/skills/optimizing-agent-prompts
+- .gemini/skills/refactoring
+- .gemini/skills/testing-strategy
+- .opencode/commands/debug-issue.md
+- .opencode/commands/implement-feature.md
+- .opencode/commands/refactor-safely.md
+- .opencode/commands/write-rfc.md
+- .opencode/skills/bff-api-design
+- .opencode/skills/code-review
+- .opencode/skills/creating-prs-from-diffs
+- .opencode/skills/frontend-implementation
+- .opencode/skills/incident-triage
+- .opencode/skills/iterating-pr-quality
+- .opencode/skills/optimizing-agent-prompts
+- .opencode/skills/refactoring
+- .opencode/skills/testing-strategy
+local_deployed_file_hashes:
+  .claude/commands/debug-issue.md: sha256:b603f635dfcf04f376ba0c10258d220f10b24e4b1b9cc0e2f26301b76be0c775
+  .claude/commands/write-rfc.md: sha256:fec3e1410b19a745a31cca900d4698457009204f04efd5ddb539025ce7c2b9b3
+  .claude/rules/engineering-principles.md: sha256:0e0314a8ead02ba56e18ee8a1f55e206d15943772ff8ff215511a0a50e3e9666
+  .claude/rules/security-principles.md: sha256:9fc2537b347ac5875fec046f976d82ad178f818ee8b0667180a1234f3c9da07d
+  .claude/rules/testing-principles.md: sha256:4253f65cd00693ef75a1fa546daf12d22b1ab8ade7fdee9dd17320b7191d19ec
+  .cursor/rules/engineering-principles.mdc: sha256:9c1b5675ef71648d25e3c5e42b0da43489e43bef4fb73633be162f613f235f5e
+  .cursor/rules/security-principles.mdc: sha256:e9afd22295e0af4b8cf697d9283ca2cb8bf9941316e1ecd5e02c2fb7e36fd32b
+  .cursor/rules/testing-principles.mdc: sha256:3d130cf3f375a1d556c0fd55f2282ee4cbbd265c658f05952bf1523aa81bd04f
+  .gemini/commands/debug-issue.toml: sha256:40ed17532c4e0642ea40e90013b6dd99ec30cdb830df788e19bb66cb46767a98
+  .gemini/commands/implement-feature.toml: sha256:f8b8fd94ee8c30c09a95a627481fb6979a47ee52c0499bc143538a865e6000f6
+  .gemini/commands/refactor-safely.toml: sha256:d17401fe835304c227dbb6e98fc2646b8005fc3f48c6cdb87d26b5fc6644e89d
+  .gemini/commands/review-pr.toml: sha256:91d33a2cefeabee188b841193863df5880ee766bc3faff1b77667a5bcd5eb20c
+  .gemini/commands/write-rfc.toml: sha256:58e3dc3da78f4152fc6b413835d993324f98bbf2cd7ec81dddb501738bd6ee35
+  .opencode/commands/debug-issue.md: sha256:b603f635dfcf04f376ba0c10258d220f10b24e4b1b9cc0e2f26301b76be0c775
+  .opencode/commands/implement-feature.md: sha256:f172cca0c05b936dbee147ee54fb011d1096a7c7a86b6f666f8ff42be9943b25
+  .opencode/commands/refactor-safely.md: sha256:336ddd0092efee7fb400562ee42803514f50c8c6562bf3286a62d643af5f62f3
+  .opencode/commands/write-rfc.md: sha256:fec3e1410b19a745a31cca900d4698457009204f04efd5ddb539025ce7c2b9b3

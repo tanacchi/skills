@@ -1,0 +1,6 @@
+---
+description: Engineering principles for this agent skills repository
+alwaysApply: true
+---
+
+`.apm/` is the source of truth. Keep changes small, avoid secrets, and prefer existing repository patterns. Run `scripts/validate.sh` after editing skills or wrappers.

@@ -1,0 +1,5 @@
+name: skills
+version: 0.1.0
+description: Personal portable skills, prompts, and instructions for AI coding agents.
+dependencies:
+  apm: []

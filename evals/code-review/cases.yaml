@@ -1,0 +1,6 @@
+cases:
+  - name: missing-error-handling
+    prompt: Review a diff that adds an API call without handling non-2xx responses.
+    expected:
+      - Flags correctness or regression risk.
+      - Mentions missing test coverage.

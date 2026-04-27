@@ -1,0 +1,7 @@
+# Engineering Principles
+
+- まず既存の設計、命名、境界を読む。
+- 変更は目的に対して最小にする。
+- public contract の変更は明示する。
+- 複雑な抽象化より、読みやすい具体実装を優先する。
+- validation command を実行し、未実行なら理由を書く。

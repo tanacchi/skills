@@ -1,0 +1,6 @@
+cases:
+  - name: inaccessible-icon-button
+    prompt: Review a React component that adds an icon-only button without an accessible name.
+    expected:
+      - Flags accessibility issue.
+      - Suggests an accessible label or semantic alternative.
