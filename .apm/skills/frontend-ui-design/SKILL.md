@@ -1,14 +1,14 @@
 ---
 name: frontend-ui-design
-description: Use this skill when designing or reviewing Your Quiz UI, mobile-first flows, wireframes, sitemap, screen states, design system, components, Storybook, accessibility, DDD/API integration, or UI automation guidance.
+description: Your Quiz の UI、モバイルファースト flow、wireframe、sitemap、画面状態、design system、component、Storybook、accessibility、DDD/API 統合、UI automation guidance を設計またはレビューするときに使う。
 license: MIT
 metadata:
   author: personal
   version: "0.2.0"
-compatibility: Requires access to Your Quiz UI design docs and, for implementation checks, the frontend project.
+compatibility: Your Quiz の UI design docs と、実装確認時は frontend project にアクセスできること。
 ---
 
-# Frontend UI Design
+# フロントエンド UI 設計
 
 ## 利用タイミング
 
@@ -21,7 +21,7 @@ Your Quiz の UI 設計、画面遷移、wireframe、component inventory、desig
 - DDD context/API contract との対応
 - loading、empty、error、offline、permission、validation states
 
-## Workflow
+## ワークフロー
 
 1. `references/ui-flows-and-wireframes.md` で user flow、screen states、mobile constraints を確認する。
 2. `references/design-system-and-components.md` で token、component taxonomy、Storybook、a11y を確認する。
@@ -29,28 +29,28 @@ Your Quiz の UI 設計、画面遷移、wireframe、component inventory、desig
 4. Interaction は touch target、keyboard/fallback operation、error/offline state を含めて設計する。
 5. Component は design system と existing frontend pattern に沿って Storybook states を揃える。
 
-## Output Format
+## 出力形式
 
-- Target user flow and screen state map
-- Wireframe/component design or implementation notes
-- Design token/component usage
-- Accessibility and responsive checks
-- DDD/API integration notes and test/story coverage
+- 対象ユーザーフローと画面状態マップ
+- wireframe/component design または implementation notes
+- design token と component の利用方針
+- accessibility と responsive の確認結果
+- DDD/API integration notes と test/story coverage
 
-## Guardrails
+## ガードレール
 
-- Start from 375px mobile-first constraints and preserve 44px minimum touch targets.
-- Gesture flows need visible hints and button alternatives.
-- Do not create UI states that contradict domain state transitions or API errors.
-- Keep repeated domain concepts visually consistent across screens.
-- Treat MCP/UI automation docs as implementation aids, not mandatory runtime architecture.
+- 375px mobile-first constraint から始め、44px 以上の touch target を保つ。
+- gesture flow には visible hint と button alternative が必要。
+- ドメイン状態遷移や API エラーと矛盾する UI 状態を作らない。
+- 複数画面に出る同じドメイン概念は視覚表現を一貫させる。
+- MCP/UI automation docs は implementation aid として扱い、必須の runtime architecture としない。
 
-## Evaluation Scenarios
+## 評価シナリオ
 
-- Review quiz answer swipe UI for touch, fallback controls, and domain state consistency.
-- Design quiz creation flow states from user story through API validation errors.
-- Check Storybook coverage for loading/error/empty/offline component states.
+- クイズ回答の swipe UI について、タッチ操作、代替操作、ドメイン状態の整合性をレビューする。
+- ユーザーストーリーから API validation error までを含めて、クイズ作成 flow の状態を設計する。
+- loading/error/empty/offline component state の Storybook coverage を確認する。
 
-## Related References
+## 関連リファレンス
 - `references/ui-flows-and-wireframes.md`
 - `references/design-system-and-components.md`

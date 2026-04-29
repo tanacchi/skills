@@ -1,15 +1,15 @@
-# Hono-TypeSpec-neverthrow Implementation: Your Quiz
+# Hono-TypeSpec-neverthrow 実装: Your Quiz
 
-## Required Stack
+## 必須スタック
 
-- Hono for HTTP routing on Cloudflare Workers.
-- TypeScript with strict type checking.
-- TypeSpec-generated OpenAPI/types as contract source.
-- Zod for runtime validation.
-- neverthrow for expected application/domain errors.
-- Cloudflare D1/SQLite and Drizzle where persistence is involved.
+- HTTP routing on Cloudflare Workers には Hono を使う。
+- strict type checking 付き TypeScript を使う。
+- contract source には TypeSpec-generated OpenAPI/types を使う。
+- runtime validation には Zod を使う。
+- expected application/domain error には neverthrow を使う。
+- persistence が関わる場合は Cloudflare D1/SQLite と Drizzle を使う。
 
-## Standard Handler Shape
+## 標準ハンドラー構造
 
 ```typescript
 const handler = async (c: AppContext) => {
@@ -30,28 +30,28 @@ const handler = async (c: AppContext) => {
 };
 ```
 
-## Implementation Rules
+## 実装ルール
 
-- Separate JSON parsing from Zod validation.
-- Prefer shared helpers such as safe JSON parse, Zod validation, and error response creation when present.
-- Use `satisfies z.ZodType<GeneratedType>` patterns where generated types are available.
-- Use `tryCatch`/conversion boundaries for unknown external failures; do not throw expected validation/domain failures.
-- Keep use cases independent from Hono context; map Hono request/response at the edge.
-- Keep repository interfaces aligned with aggregates and DDD boundaries.
+- JSON parsing と Zod validation を分離する。
+- safe JSON parse、Zod validation、error response 作成などの shared helper がある場合は優先する。
+- generated type がある場合は `satisfies z.ZodType<GeneratedType>` pattern を使う。
+- unknown external failure には `tryCatch`/conversion boundary を使い、想定済み validation/domain failure は throw しない。
+- use case は Hono context から独立させ、Hono request/response は edge で map する。
+- repository interface は aggregate と DDD boundary に揃える。
 
-## Error Mapping
+## エラーマッピング
 
-- Validation errors map to documented 400/422 responses.
-- Missing resources map to 404.
-- Conflicts and invariant violations map to documented domain error status codes.
-- Unexpected infrastructure failures should be logged and returned as safe server errors without leaking internals.
+- validation error は文書化された 400/422 response に map する。
+- missing resource は 404 に map する。
+- conflict と invariant violation は文書化された domain error status code に map する。
+- unexpected infrastructure failure は log に残し、internal を漏らさない safe server error として返す。
 
-## Library Boundaries
+## ライブラリ境界
 
-- Do not introduce unapproved validation, HTTP client, ORM, or test libraries when the existing stack covers the need.
-- Browser storage and frontend-only libraries do not belong in API runtime code.
+- 既存 stack で足りる場合、未承認の validation、HTTP client、ORM、test library を導入しない。
+- browser storage と frontend-only library は API runtime code に入れない。
 
-## Source Docs
+## 出典ドキュメント
 - `../your-quiz/docs/instructions/project/README.md`
 - `../your-quiz/docs/instructions/project/api-implementation-rules.md`
 - `../your-quiz/docs/instructions/project/api-implementation-samples.md`

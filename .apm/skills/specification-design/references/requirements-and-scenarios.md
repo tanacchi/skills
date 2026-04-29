@@ -1,44 +1,44 @@
-# Requirements And Scenarios: Your Quiz
+# 要件とシナリオ: Your Quiz
 
-## Product Requirements
+## プロダクト要件
 
-- Users can answer approved quizzes without login.
-- Users can create quiz content and submit it for approval.
-- The system supports answer history, wrong-question review, search/discovery, and offline-capable usage where documented.
-- Quiz answering should feel fast and mobile-first, with swipe/button interaction and immediate feedback.
-- Quality control matters: created quizzes need validation, approval, and publication rules.
+- user は login なしで approved quiz に回答できる。
+- user は quiz content を作成し、approval に提出できる。
+- system は answer history、wrong-question review、search/discovery、文書化された範囲の offline-capable usage を支援する。
+- quiz answering は swipe/button interaction と immediate feedback により、fast かつ mobile-first に感じられる。
+- 品質管理が重要。作成された quiz には validation、approval、publication rule が必要。
 
-## Primary User Stories
+## 主要ユーザーストーリー
 
-- As a learner, I want to find and answer quizzes quickly so that I can study casually.
-- As a creator, I want to create and submit quizzes so that others can learn from them.
-- As an approver/admin-like actor, I want to review submitted quizzes so that public quiz quality stays high.
-- As a learner, I want to review answer history so that I can improve weak areas.
-- As a mobile user, I want offline support so that I can continue in unstable network conditions.
-- As a learner, I want search/filtering so that I can find relevant quizzes.
+- learner として、casual に学習できるよう quiz を素早く見つけて回答したい。
+- creator として、他の user が学べるよう quiz を作成して提出したい。
+- approver/admin-like actor として、public quiz quality を保てるよう submitted quiz を review したい。
+- learner として、弱点を改善できるよう answer history を review したい。
+- mobile user として、不安定な network condition でも続けられるよう offline support がほしい。
+- learner として、relevant quiz を見つけられるよう search/filtering したい。
 
-## Success Scenarios
+## 成功シナリオ
 
-- Search or tag filtering leads to quiz selection and answering.
-- Quiz creation proceeds through validation, preview, submit, and approval/publishing.
-- Answer history is visible with useful statistics and wrong-question review.
-- Offline mode preserves useful work and syncs when connectivity returns.
+- search または tag filtering から quiz selection と answering へ進める。
+- quiz creation は validation、preview、submit、approval/publishing を通る。
+- answer history は useful statistics と wrong-question review とともに見える。
+- offline mode は useful work を保持し、connectivity が戻ったら sync する。
 
-## Error Scenarios
+## エラーシナリオ
 
-- Server communication failure: show recoverable error and avoid data loss.
-- Validation error: show field-level correction guidance.
-- Unauthorized/unapproved access: prevent use of unavailable quizzes and explain state.
-- Browser storage limitation: gracefully degrade offline behavior.
+- server communication failure: recoverable error を表示し、data loss を避ける。
+- validation error: field-level correction guidance を表示する。
+- unauthorized/unapproved access: unavailable quiz の利用を防ぎ、state を説明する。
+- browser storage limitation: offline behavior を graceful に degrade する。
 
-## Downstream Traceability
+## 後続工程への追跡性
 
-- Requirements feed DDD terms and aggregate invariants.
-- Success/error scenarios feed BDD/API tests and E2E journeys.
-- UI stories feed sitemap, flows, wireframes, and component states.
-- Non-functional requirements feed architecture/API/UI design constraints.
+- requirement は DDD term と aggregate invariant の入力になる。
+- success/error scenario は BDD/API test と E2E journey の入力になる。
+- UI story は sitemap、flow、wireframe、component state の入力になる。
+- non-functional requirement は architecture/API/UI design constraint の入力になる。
 
-## Source Docs
+## 出典ドキュメント
 
 - `../your-quiz/docs/instructions/shared/workflow/01.01_specification.md`
 - `../your-quiz/docs/project/specifications/requirements/requirements-quiz.md`

@@ -1,31 +1,31 @@
-# Quiz Development Rules: Essential Checklist
+# クイズ開発ルール: 重要チェックリスト
 
-This file intentionally does not summarize restricted quiz question/answer files. It captures test and workflow guardrails from readable workflow/tool/language docs plus the tests README warning.
+この file は、制限付きの quiz question/answer file を意図的に要約しない。読める workflow/tool/language docs と tests README の警告から、test と workflow の guardrail だけを記録する。
 
-## Restricted Test Docs
+## 制限付きテスト文書
 
-- Do not read quiz question, answer, or complete files under `../your-quiz/docs/instructions/shared/tests/` unless explicitly instructed.
-- Reading the README warning is allowed and should guide behavior.
-- Do not use restricted quiz content as source material for skills.
+- 明示指示がない限り、`../your-quiz/docs/instructions/shared/tests/` 配下の question、answer、complete files を読まない。
+- README warning を読むことは許可されており、行動指針として扱う。
+- restricted quiz content を skill の source material にしない。
 
-## Workflow And Quality Guardrails
+## ワークフローと品質ガードレール
 
-- Do not skip specification/design phases for new feature behavior.
-- Keep DDD before DB design when domain invariants are still unclear.
-- Prefer TDD/BDD where workflow docs require executable specs before implementation.
-- Use project tool docs for git, npm/pnpm, mise, TypeSpec, Markdown, and TypeScript conventions.
-- Avoid `any`, broad assertions, and ignored type errors unless a local rule explicitly permits and the risk is reported.
-- Propose ADRs for durable architecture or technology decisions.
+- new feature behavior では specification/design phase を省略しない。
+- domain invariant が不明確な間は DB design より DDD を先にする。
+- workflow docs が implementation 前の executable specs を求める場合は TDD/BDD を優先する。
+- git、npm/pnpm、mise、TypeSpec、Markdown、TypeScript convention は project tool docs を使う。
+- local rule が明示許可し risk を報告した場合を除き、`any`、広すぎる assertion、type error の無視を避ける。
+- 長く残る architecture / technology decision には ADR を提案する。
 
-## Review Checklist
+## レビューチェックリスト
 
-- Does the test validate business behavior or only implementation shape?
-- Are both success and failure paths covered?
-- Are API tests aligned with TypeSpec/OpenAPI contracts?
-- Are DB-backed tests isolated from production data?
-- Are deferred cases recorded as test gaps or Future Work?
+- test は business behavior を検証しているか、それとも implementation shape だけを見ているか。
+- success path と failure path の両方が覆われているか。
+- API test は TypeSpec/OpenAPI contract と揃っているか。
+- DB-backed test は production data から隔離されているか。
+- deferred case は test gap または 将来課題 として記録されているか。
 
-## Source Docs
+## 出典ドキュメント
 - `../your-quiz/docs/instructions/shared/tests/README.md`
 - `../your-quiz/docs/instructions/shared/workflow/00.01_common.md`
 - `../your-quiz/docs/instructions/shared/workflow/00.02_workflow.md`

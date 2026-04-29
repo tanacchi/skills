@@ -1,36 +1,36 @@
-# Tactical Design: Your Quiz
+# 戦術的設計: Your Quiz
 
-## Object Classification
+## オブジェクト分類
 
 | 分類 | 判定基準 | 実装上の特徴 |
 | :--- | :--- | :--- |
-| Entity | IDで識別し、状態とライフサイクルがある。 | ID equality, lifecycle behavior, invariant checks. |
-| Value Object | 値で識別し、immutable。 | Brand/Zod schema candidates; update by replacement. |
-| Domain Service | 複数 aggregate に跨る計算、評価、調整。 | Stateless behavior; named around domain language. |
-| Aggregate | Consistency and transaction boundary. | Root controls internal entity/value updates. |
+| Entity | IDで識別し、状態とライフサイクルがある。 | ID equality、lifecycle behavior、invariant check。 |
+| Value Object | 値で識別し、immutable。 | Brand/Zod schema candidate。更新は replacement で行う。 |
+| Domain Service | 複数 aggregate に跨る計算、評価、調整。 | stateless behavior。domain language で命名する。 |
+| Aggregate | consistency と transaction boundary。 | root が internal entity/value update を制御する。 |
 
-## Aggregate Design Rules
+## 集約設計ルール
 
-- Aggregate root is the only mutation entry point for internal members.
-- Aggregate boundary should match strong consistency needs, not UI screen shape.
-- Keep aggregate small enough for reasoning and testing.
-- Reference other aggregates by ID; coordinate by application service or domain event.
-- Record invariants as behavior, not only field validation.
+- aggregate root は internal member の唯一の mutation entry point。
+- aggregate boundary は UI screen shape ではなく strong consistency need に合わせる。
+- aggregate は reasoning と testing がしやすい大きさに保つ。
+- 他 aggregate は ID で reference し、application service または domain event で coordinate する。
+- invariant は field validation だけでなく behavior として記録する。
 
-## Your Quiz Invariant Examples
+## Your Quiz の不変条件例
 
-- Quiz: question/options/explanation/tag rules, sanitization, approval state, published availability.
-- LearningSession: started session, answer submission lifecycle, progress, completion state.
-- UserSession: anonymous session validity, device/session association, ownership checks.
-- SyncSession: pending item state, conflict resolution status, idempotent sync completion.
+- Quiz: question/options/explanation/tag rule、sanitization、approval state、published availability。
+- LearningSession: started session、answer submission lifecycle、progress、completion state。
+- UserSession: anonymous session validity、device/session association、ownership check。
+- SyncSession: pending item state、conflict resolution status、idempotent sync completion。
 
-## Implementation Handoff
+## 実装への引き渡し
 
-- Use TypeScript types, Brand types, and Zod schemas where they express domain invariants at boundaries.
-- Use `Result`-style errors for domain failures when implementation follows neverthrow conventions.
-- Keep persistence-specific constraints in repository/DB layer unless they are true business invariants.
+- boundary で domain invariant を表せる場合は TypeScript type、Brand type、Zod schema を使う。
+- implementation が neverthrow convention に従う場合、domain failure には `Result` style error を使う。
+- 真の business invariant でない限り、persistence 固有制約は repository/DB layer に置く。
 
-## Source Docs
+## 出典ドキュメント
 - `../your-quiz/docs/instructions/shared/workflow/03.05_domain-object-extraction-guide.md`
 - `../your-quiz/docs/instructions/shared/workflow/03.06_entity-relationship-analysis-guide.md`
 - `../your-quiz/docs/instructions/shared/workflow/03.07_domain-service-extraction-guide.md`

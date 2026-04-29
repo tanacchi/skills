@@ -1,14 +1,14 @@
 ---
 name: architecture-design
-description: Use this skill when designing or reviewing Your Quiz architecture, technology selection, system boundaries, data architecture, DB design, communication patterns, non-functional requirements, hosting, monitoring, or ADR-level decisions.
+description: Your Quiz のアーキテクチャ、技術選定、システム境界、データアーキテクチャ、DB 設計、通信方式、非機能要件、ホスティング、監視、ADR レベルの判断を設計またはレビューするときに使う。
 license: MIT
 metadata:
   author: personal
   version: "0.1.0"
-compatibility: Requires access to Your Quiz architecture, ADR, and workflow docs.
+compatibility: Your Quiz の architecture、ADR、workflow docs にアクセスできること。
 ---
 
-# Architecture Design
+# アーキテクチャ設計
 
 ## 利用タイミング
 
@@ -18,10 +18,10 @@ Your Quiz の architecture、tech selection、communication、data/DB design、n
 
 - 変更対象の capability、context、API/UI/data flow
 - 既存 architecture docs、ADR、tech selection
-- Performance、availability、security、operability、cost constraints
-- DDD aggregate boundaries and persistence needs
+- performance、availability、security、operability、cost constraint
+- DDD aggregate boundary と persistence need
 
-## Workflow
+## ワークフロー
 
 1. `references/architecture-decisions.md` で accepted ADR と technical baseline を確認する。
 2. `references/non-functional-checklist.md` で performance/security/availability/operations/cost impact を確認する。
@@ -29,28 +29,28 @@ Your Quiz の architecture、tech selection、communication、data/DB design、n
 4. 選択肢、tradeoff、decision、impact、rollback/migration consideration を整理する。
 5. Durable decision なら ADR 作成または更新を提案する。
 
-## Output Format
+## 出力形式
 
-- Architecture decision or review result
-- Alternatives and tradeoffs
-- Affected contexts/components/data flows
-- Non-functional impact
+- アーキテクチャ判断またはレビュー結果
+- alternative と tradeoff
+- 影響を受ける context/component/data flow
+- non-functional impact
 - ADR/docs update recommendation
 
-## Guardrails
+## ガードレール
 
 - Accepted ADR と矛盾する設計変更は、実装だけで進めず ADR 更新を提案する。
 - DB design は DDD aggregate と transaction boundary を確認してから確定する。
 - Non-functional targets を曖昧にしたまま technology decision を確定しない。
 - `docs/tmp` を採用済み architecture source として扱わない。
 
-## Evaluation Scenarios
+## 評価シナリオ
 
-- New storage requirement が D1/SQLite 方針に合うか確認する。
+- new storage requirement が D1/SQLite 方針に合うか確認する。
 - API latency target を満たす communication/data flow をレビューする。
-- Framework/library change proposal が既存 ADR と衝突しないか確認する。
+- framework/library change proposal が既存 ADR と衝突しないか確認する。
 
-## Related References
+## 関連リファレンス
 
 - `references/architecture-decisions.md`
 - `references/non-functional-checklist.md`

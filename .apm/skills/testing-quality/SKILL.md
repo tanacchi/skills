@@ -1,14 +1,14 @@
 ---
 name: testing-quality
-description: Use this skill when planning, implementing, or reviewing Your Quiz tests: PactumJS BDD/API specs, Vitest unit tests, TDD flow, mutation testing, Playwright E2E, coverage quality, test gaps, or project test guardrails.
+description: Your Quiz のテスト計画、実装、レビューで、PactumJS BDD/API specs、Vitest unit tests、TDD flow、mutation testing、Playwright E2E、coverage quality、test gaps、project test guardrails を扱うときに使う。
 license: MIT
 metadata:
   author: personal
   version: "0.2.0"
-compatibility: Requires an environment supporting PactumJS, Vitest, Stryker, and Playwright.
+compatibility: PactumJS、Vitest、Stryker、Playwright を利用できる環境であること。
 ---
 
-# Testing Quality
+# テスト品質
 
 ## 利用タイミング
 
@@ -21,7 +21,7 @@ Your Quiz の BDD/API、unit、mutation、E2E、test gap 分析、品質ゲー�
 - 変更リスク、failure mode、regression area
 - 使用する test env、fixture、mock/stub boundary
 
-## Workflow
+## ワークフロー
 
 1. `references/bdd-and-e2e.md` で business scenario と E2E scope を決める。
 2. `references/unit-and-mutation-testing.md` で unit/mutation の狙いと品質ゲートを決める。
@@ -29,29 +29,29 @@ Your Quiz の BDD/API、unit、mutation、E2E、test gap 分析、品質ゲー�
 4. 最も低コストで defect を検出できる test level を選ぶ。
 5. 実行結果だけでなく、何を検出できるようになったかと残る test gap を報告する。
 
-## Output Format
+## 出力形式
 
-- Test strategy and chosen layers
-- Added/updated tests and covered behavior
-- Commands run and result
-- Coverage/mutation results if relevant
-- Remaining gaps and risks
+- test strategy と選択した layer
+- 追加/更新した test と covered behavior
+- 実行した command と結果
+- 関連する場合は coverage/mutation result
+- 残る gap と risk
 
-## Guardrails
+## ガードレール
 
-- Do not read `../your-quiz/docs/instructions/shared/tests/` quiz files except README unless the user explicitly instructs it.
-- Do not rely on coverage number alone; test behavior and contracts.
-- Keep mocks at system boundaries; avoid mocking away the contract under test.
-- Use test environment / D1 test binding for DB-backed tests.
-- If mutation score or coverage target is not practical for the current change, report the reason and residual risk.
+- ユーザーが明示しない限り、`../your-quiz/docs/instructions/shared/tests/` の quiz files は README 以外読まない。
+- coverage number だけに依存せず、behavior と contract を test する。
+- mock は system boundary に置き、test 対象の contract を mock で消さない。
+- DB-backed test には test environment / D1 test binding を使う。
+- 現在の変更で mutation score または coverage target が現実的でない場合は、理由と residual risk を報告する。
 
-## Evaluation Scenarios
+## 評価シナリオ
 
-- Convert a success/error scenario into PactumJS API tests.
-- Add unit tests for aggregate invariants and then review surviving mutants.
-- Verify quiz answering E2E through UI, API, and persistence with offline/error coverage where needed.
+- success/error scenario を PactumJS API test に変換する。
+- aggregate invariant の unit test を追加し、surviving mutant をレビューする。
+- 必要な offline/error coverage を含め、UI、API、persistence を通した quiz answering E2E を検証する。
 
-## Related References
+## 関連リファレンス
 - `references/bdd-and-e2e.md`
 - `references/unit-and-mutation-testing.md`
 - `references/quiz-development-rules.md`

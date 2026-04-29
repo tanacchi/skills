@@ -1,38 +1,38 @@
-# API Implementation Checklist: Your Quiz
+# API 実装チェックリスト: Your Quiz
 
-## Before Implementation
+## 実装前
 
-- [ ] Relevant TypeSpec/API catalog entry exists or the contract change is part of this task.
-- [ ] Endpoint belongs to the correct bounded context.
-- [ ] Request/response/error shapes and status codes are documented.
-- [ ] D1/Drizzle bindings and environment names are known.
-- [ ] Test level is selected: BDD/API, unit, mutation, E2E, or focused regression.
+- [ ] 関連する TypeSpec/API catalog entry がある、または contract change が今回 task に含まれている。
+- [ ] endpoint が正しい bounded context に属している。
+- [ ] request/response/error shape と status code が文書化されている。
+- [ ] D1/Drizzle binding と environment name が分かっている。
+- [ ] test level が BDD/API、unit、mutation、E2E、focused regression から選ばれている。
 
-## During Implementation
+## 実装中
 
-- [ ] Hono route is thin; application/domain logic is outside the handler.
-- [ ] JSON parsing and validation are separate.
-- [ ] Zod schemas align with generated TypeSpec types.
-- [ ] Expected errors are typed and mapped to common error response format.
-- [ ] `as any`, `@ts-ignore`, and broad non-null assertions are avoided.
-- [ ] Repository code does not leak SQL/D1 details into domain objects.
-- [ ] User content is sanitized where API design requires it.
+- [ ] Hono route は薄く、application/domain logic は handler の外にある。
+- [ ] JSON parsing と validation が分離されている。
+- [ ] Zod schema が generated TypeSpec types と揃っている。
+- [ ] 想定内の error が型付けされ、common error response format に map されている。
+- [ ] `as any`、`@ts-ignore`、広すぎる non-null assertion を避けている。
+- [ ] repository code が SQL/D1 detail を domain object に漏らしていない。
+- [ ] API design が要求する箇所で user content が sanitized されている。
 
-## Before Review
+## レビュー前
 
-- [ ] Typecheck passes.
-- [ ] Relevant tests pass or skipped tests are justified.
-- [ ] Generated artifacts are regenerated through scripts when required.
-- [ ] API catalog and TypeSpec contract are consistent.
-- [ ] Error response examples cover success, validation, not found, conflict, auth/rate limit where applicable.
+- [ ] typecheck が通る。
+- [ ] 関連 test が通る、または skip した test の理由が説明されている。
+- [ ] 必要な generated artifact は script 経由で再生成されている。
+- [ ] API catalog と TypeSpec contract が整合している。
+- [ ] error response example が、該当する場合に success、validation、not found、conflict、auth/rate limit を覆っている。
 
-## Useful Commands
+## よく使うコマンド
 
-- Prefer project scripts from `pnpm-scripts.md` over ad hoc commands.
-- Use TypeSpec generation commands from shared TypeSpec tooling docs.
-- Use test env / D1 test bindings for DB-backed tests.
+- ad hoc command より `pnpm-scripts.md` の project script を優先する。
+- shared TypeSpec tooling docs の TypeSpec generation command を使う。
+- DB-backed test には test env / D1 test binding を使う。
 
-## Source Docs
+## 出典ドキュメント
 - `../your-quiz/docs/instructions/project/README.md`
 - `../your-quiz/docs/instructions/project/api-implementation-rules.md`
 - `../your-quiz/docs/instructions/project/pnpm-scripts.md`

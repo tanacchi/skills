@@ -1,33 +1,33 @@
-# Unit & Mutation Testing: Your Quiz
+# Unit と Mutation テスト: Your Quiz
 
-## Unit Tests With Vitest
+## Vitest による unit test
 
-- Use unit tests for aggregate invariants, value object validation, domain services, use cases, helpers, and response mapping.
-- Prefer parameterized tests for boundary values and error cases.
-- Test public behavior and contracts; avoid tests that lock incidental implementation details.
-- Keep fixtures/builders readable and close to domain language.
-- Coverage target is high, but meaningful behavior coverage matters more than line-count gaming.
+- aggregate invariant、value object validation、domain service、use case、helper、response mapping には unit test を使う。
+- boundary value と error case には parameterized test を優先する。
+- public behavior と contract を test し、偶発的な implementation detail を固定する test は避ける。
+- fixture/builder は読みやすく、domain language に近く保つ。
+- coverage target は高めだが、line-count を稼ぐことより意味ある behavior coverage を優先する。
 
-## Mutation Testing With Stryker
+## Stryker による mutation testing
 
-- Run mutation testing after unit coverage is in place for risk-heavy domain/API logic.
-- Surviving mutants identify missing assertions or equivalent mutations.
-- Add tests for meaningful survivors in conditions, branches, validation, and error handling.
-- Document equivalent mutants rather than adding brittle tests for behavior that cannot change outputs.
+- risk の高い domain/API logic で unit coverage を整えた後に mutation testing を実行する。
+- surviving mutant は不足している assertion または equivalent mutation を示す。
+- condition、branch、validation、error handling の意味ある survivor には test を追加する。
+- output が変わらない behavior に brittle test を追加するのではなく、equivalent mutant として記録する。
 
-## TDD Flow
+## TDD フロー
 
-- For new behavior, confirm red before green when feasible.
-- Refactor after tests pass while preserving domain/API behavior.
-- When changing existing behavior, write regression tests around the bug or contract first.
+- new behavior では、可能な範囲で green の前に red を確認する。
+- test が通った後、domain/API behavior を保ちながら refactor する。
+- 既存 behavior を変える場合は、先に bug または contract 周辺の regression test を書く。
 
-## Test Data
+## テストデータ
 
-- Use fixture/builders for normal, boundary, invalid, and conflict cases.
-- Avoid production data and secrets in test fixtures.
-- Keep D1/DB tests isolated through test env.
+- normal、boundary、invalid、conflict case には fixture/builder を使う。
+- test fixture に production data と secret を入れない。
+- D1/DB test は test env で隔離する。
 
-## Source Docs
+## 出典ドキュメント
 - `../your-quiz/docs/instructions/shared/workflow/09.01_unit-testing.md`
 - `../your-quiz/docs/instructions/shared/workflow/09.02_mutation-testing.md`
 - `../your-quiz/docs/instructions/shared/workflow/10.01_implementation.md`

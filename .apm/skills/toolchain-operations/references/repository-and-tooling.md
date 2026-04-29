@@ -1,32 +1,32 @@
-# Repository And Tooling: Your Quiz
+# リポジトリとツール: Your Quiz
 
-## Repository Setup
+## リポジトリセットアップ
 
-- Use repository setup docs before changing onboarding or tool assumptions.
-- Prefer existing package manager and scripts over global one-off commands.
-- Use mise docs for runtime/tool version assumptions.
-- Keep setup steps reproducible and avoid machine-specific paths.
+- onboarding や tool assumption を変える前に repository setup docs を確認する。
+- global な one-off command より、既存 package manager と script を優先する。
+- runtime/tool version assumption には mise docs を参照する。
+- setup step は再現可能にし、machine-specific path を避ける。
 
 ## Git
 
-- Inspect `git status` before mutating files.
-- Keep commits scoped and reviewable when committing is requested.
-- Do not discard unrelated user changes.
-- Avoid destructive commands unless explicitly approved.
+- file を変更する前に `git status` を確認する。
+- commit を求められた場合、commit は scoped かつ reviewable に保つ。
+- unrelated user change を破棄しない。
+- 明示承認なしに destructive command を避ける。
 
 ## npm / pnpm Scripts
 
-- Use documented scripts for dev, build, typecheck, test, TypeSpec generation, BDD, mutation, and deployment operations.
-- Prefer workspace-aware commands from project docs.
-- If a script rewrites generated artifacts, mention expected files before running.
+- dev、build、typecheck、test、TypeSpec generation、BDD、mutation、deployment operation には文書化された script を使う。
+- project docs の workspace-aware command を優先する。
+- script が generated artifact を書き換える場合は、実行前に想定される file を明示する。
 
-## TypeSpec Tooling
+## TypeSpec ツール
 
-- TypeSpec is used to generate OpenAPI and TypeScript-facing contracts.
-- Use documented `tsp compile` / generation scripts rather than hand-editing generated OpenAPI.
-- Check generated diffs after running schema commands.
+- TypeSpec は OpenAPI と TypeScript 向け contract の生成に使う。
+- generated OpenAPI を手編集せず、文書化された `tsp compile` / generation script を使う。
+- schema command 実行後は generated diff を確認する。
 
-## Source Docs
+## 出典ドキュメント
 
 - `../your-quiz/docs/instructions/shared/repository-setup.md`
 - `../your-quiz/docs/instructions/shared/tools/git.md`

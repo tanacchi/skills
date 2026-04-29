@@ -1,14 +1,14 @@
 ---
 name: api-implementation
-description: Use this skill when implementing or reviewing Your Quiz Hono APIs with TypeScript, TypeSpec-generated types, Zod validation, neverthrow Result flows, Cloudflare Workers, D1/Drizzle persistence, API scripts, or runtime error handling.
+description: Your Quiz の Hono API を TypeScript、TypeSpec 生成型、Zod validation、neverthrow Result flow、Cloudflare Workers、D1/Drizzle 永続化、API scripts、runtime error handling とともに実装またはレビューするときに使う。
 license: MIT
 metadata:
   author: personal
   version: "0.2.0"
-compatibility: Requires access to the Your Quiz API implementation project and generated API contracts.
+compatibility: Your Quiz API implementation project と generated API contract にアクセスできること。
 ---
 
-# API Implementation
+# API 実装
 
 ## 利用タイミング
 
@@ -17,40 +17,40 @@ Your Quiz の Hono API 実装、TypeSpec 生成型との整合、Zod validation�
 ## 確認する入力
 
 - TypeSpec/OpenAPI/generated types の現状
-- Hono route、handler、bindings、environment
+- Hono route、handler、bindings、environment の現状
 - Zod schema、use case、domain service、repository
 - pnpm scripts、typecheck、BDD/unit test commands
 
-## Workflow
+## ワークフロー
 
-1. `references/hono-typespec-neverthrow.md` で standard handler, validation, error handling rules を確認する。
+1. `references/hono-typespec-neverthrow.md` で standard handler、validation、error handling rule を確認する。
 2. `references/api-implementation-checklist.md` で実装前、実装中、レビュー前の確認項目を追う。
 3. TypeSpec 生成型と Zod schema の整合を `satisfies` などで担保する。
-4. Request parsing、validation、use case、repository、response mapping を明確に分離する。
+4. request parsing、validation、use case、repository、response mapping を明確に分離する。
 5. Typecheck、unit/API tests、BDD tests を変更リスクに応じて実行する。
 
-## Output Format
+## 出力形式
 
 - 変更した route/handler/use case/repository
-- Contract and validation alignment
-- Error mapping and status codes
-- Commands/tests run
-- Remaining risks or assertions
+- 契約と validation の整合性
+- error mapping と status code
+- 実行した command/test
+- 残る risk または assertion
 
-## Guardrails
+## ガードレール
 
-- Avoid `as any`, `@ts-ignore`, and unchecked non-null assertions.
-- Do not bypass TypeSpec contracts by inventing parallel request/response types.
-- Convert expected failures to typed error results and map them to documented HTTP responses.
-- Keep Cloudflare Workers/D1 bindings typed and environment-specific data out of source.
-- Do not edit generated files manually unless the project explicitly treats them as checked-in outputs.
+- `as any`、`@ts-ignore`、未確認の non-null assertion を避ける。
+- TypeSpec 契約と並行する独自 request/response 型を作って契約を迂回しない。
+- 想定内の失敗は型付き error result に変換し、文書化された HTTP response に対応付ける。
+- Cloudflare Workers/D1 binding は型付けし、環境固有データを source に入れない。
+- project が明示的に checked-in output と扱う場合を除き、generated file を手編集しない。
 
-## Evaluation Scenarios
+## 評価シナリオ
 
-- Implement a create quiz endpoint from TypeSpec through Hono and Zod validation.
-- Fix a handler that throws runtime errors by converting expected failures into Result flow.
-- Review whether D1 repository code leaks persistence details into domain logic.
+- TypeSpec から Hono と Zod validation まで一貫した quiz 作成 endpoint を実装する。
+- runtime error を投げる handler を、想定内の失敗を Result flow に変換する形で修正する。
+- D1 repository code が persistence detail を domain logic に漏らしていないかレビューする。
 
-## Related References
+## 関連リファレンス
 - `references/hono-typespec-neverthrow.md`
 - `references/api-implementation-checklist.md`

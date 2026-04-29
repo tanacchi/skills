@@ -1,36 +1,36 @@
-# Strategic Design: Your Quiz
+# 戦略的設計: Your Quiz
 
-## Domain Understanding
+## ドメイン理解
 
-- Read requirements and scenarios first; extract nouns as object candidates and verbs as behavior/event candidates.
-- Separate business terms from technical implementation terms.
-- Record Japanese and English terms consistently when naming code, APIs, docs, and UI labels.
-- Treat user-flow analysis and event storming as inputs to context boundaries, not just UI documentation.
+- 先に requirements と scenario を読み、名詞を object candidate、動詞を behavior/event candidate として抽出する。
+- business term と technical implementation term を分離する。
+- code、API、docs、UI label の命名では日本語/英語 term を一貫して記録する。
+- user-flow analysis と event storming は UI documentation だけでなく context boundary の入力として扱う。
 
-## Bounded Contexts
+## 境界づけられたコンテキスト
 
-| Context | Core responsibility | Boundary indicator |
+| context | 主要責務 | 境界の目印 |
 | --- | --- | --- |
-| Quiz Management | Quiz creation, drafts, approval, quality control, master data | Approval and publishing rules dominate. |
-| Quiz Learning | Decks, answering, judgement, progress | High-frequency answer flow and learning outcome dominate. |
-| User Session | Anonymous identity, session lifecycle, permissions | Security/privacy and session ownership dominate. |
-| Offline Sync | Offline storage, pending changes, conflict handling | Technical sync and reconciliation complexity dominate. |
+| Quiz Management | quiz creation、draft、approval、quality control、master data | approval と publishing rule が中心。 |
+| Quiz Learning | deck、answering、judgement、progress | high-frequency answer flow と learning outcome が中心。 |
+| User Session | anonymous identity、session lifecycle、permission | security/privacy と session ownership が中心。 |
+| Offline Sync | offline storage、pending change、conflict handling | technical sync と reconciliation complexity が中心。 |
 
-## Context Mapping
+## コンテキストマッピング
 
-- Quiz Management publishes approved quiz language consumed by Quiz Learning.
-- User Session supplies identity/session verification to learning and creation flows.
-- Offline Sync should translate cached/local data through an anti-corruption boundary before it affects domain APIs.
-- Search/discovery may read across contexts but should not become an unbounded domain model.
+- Quiz Management は Quiz Learning が使う approved quiz language を公開する。
+- User Session は learning/creation flow に identity/session verification を提供する。
+- Offline Sync は cached/local data が domain API に影響する前に anti-corruption boundary で変換する。
+- Search/discovery は context 横断で read してよいが、無境界な domain model にしない。
 
-## Strategic Completion Checks
+## 戦略的設計の完了チェック
 
-- Context responsibilities are cohesive and non-overlapping.
-- Terms are defined in the ubiquitous language or identified as open questions.
-- Cross-context communication has a named pattern: API call, event, published language, customer/supplier, or ACL.
-- Team/API/UI boundaries can be derived from the context map.
+- context responsibility が cohesive で重複していない。
+- term は ubiquitous language で定義されるか、open question として特定されている。
+- context 横断 communication には API call、event、published language、customer/supplier、ACL などの named pattern がある。
+- team/API/UI boundary を context map から導ける。
 
-## Source Docs
+## 出典ドキュメント
 - `../your-quiz/docs/instructions/shared/workflow/03.01_ddd-design.md`
 - `../your-quiz/docs/instructions/shared/workflow/03.02_domain-understanding-guide.md`
 - `../your-quiz/docs/instructions/shared/workflow/03.02.5_user-flow-analysis-guide.md`

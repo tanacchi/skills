@@ -1,38 +1,38 @@
-# Story Quality Checklist: Your Quiz
+# ストーリー品質チェックリスト: Your Quiz
 
-## Story Shape
+## ストーリーの形
 
-- Who: actor/persona is named.
-- What: user-visible action or outcome is clear.
-- When: trigger or situation is stated.
-- Where: screen/API/context is known where relevant.
-- Why: learning, creation, quality, history, offline, or search value is explicit.
-- How well: acceptance criteria and non-functional constraints are measurable.
+- who: actor/persona が名付けられている。
+- what: user-visible action または outcome が明確。
+- when: trigger または situation が示されている。
+- where: 関連する場合、screen/API/context が分かっている。
+- why: learning、creation、quality、history、offline、search の value が明示されている。
+- how well: acceptance criteria と non-functional constraint が測定可能。
 
-## Acceptance Criteria
+## 受け入れ条件
 
-- Include at least one success path and relevant error paths.
-- State observable behavior, not only implementation steps.
-- Include validation, empty, loading, offline, permission, and conflict states when relevant.
-- Identify data persistence or sync expectations.
-- Identify API/UI/DDD/test artifacts expected downstream.
+- 少なくとも 1 つの success path と関連する error path を含める。
+- implementation step だけでなく observable behavior を書く。
+- 関連する場合、validation、empty、loading、offline、permission、conflict state を含める。
+- data persistence または sync expectation を特定する。
+- 後続で期待される API/UI/DDD/test artifact を特定する。
 
-## Future Work Split
+## 将来課題 の分離
 
-- Move real but deferred capabilities to Future Work.
-- Do not defer core acceptance criteria needed for the current MVP behavior.
-- Mark assumptions and open questions separately from scope exclusions.
-- Keep future enhancements traceable to the original story or requirement.
+- 実在するが延期する capability は 将来課題 に移す。
+- 現在の MVP behavior に必要な core acceptance criteria は延期しない。
+- assumption と open question は scope exclusion と分けて記録する。
+- 将来 enhancement は original story または requirement に追跡できる形に保つ。
 
-## Review Questions
+## レビュー質問
 
-- Can this story be tested by BDD or E2E?
-- Does the story imply a new domain concept or invariant?
-- Does the story require a new API contract or just UI composition?
-- Does it affect architecture, data retention, security, or performance?
-- Is the expected failure behavior clear enough for implementation?
+- この story は BDD または E2E で test できるか。
+- story は新しい domain concept または invariant を含意しているか。
+- story は新しい API contract を要求するか、それとも UI composition だけか。
+- architecture、data retention、security、performance に影響するか。
+- 想定 failure behavior は implementation できるほど明確か。
 
-## Source Docs
+## 出典ドキュメント
 
 - `../your-quiz/docs/instructions/shared/workflow/01.01_specification.md`
 - `../your-quiz/docs/project/specifications/README.md`

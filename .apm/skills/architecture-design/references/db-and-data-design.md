@@ -1,33 +1,33 @@
-# DB And Data Design: Your Quiz
+# DB とデータ設計: Your Quiz
 
-## Data Ownership
+## データ所有
 
-- Align tables and repositories with bounded contexts and aggregate boundaries.
-- Keep aggregate transaction boundaries explicit.
-- Prefer ID references across aggregates; avoid accidental cross-aggregate object graphs.
-- Keep read models/search projections separate from command-side invariants when needed.
+- table と repository は bounded context と aggregate boundary に揃える。
+- aggregate の transaction boundary を明示する。
+- aggregate 間は ID reference を優先し、意図しない cross-aggregate object graph を避ける。
+- 必要に応じて read model/search projection を command-side invariant から分離する。
 
-## Persistence Baseline
+## 永続化の基本方針
 
-- SQLite / Cloudflare D1 is the accepted persistence direction.
-- Drizzle ORM is the accepted ORM direction.
-- Schema and migration plans should be reproducible and reviewable.
-- DB constraints can support domain invariants but should not be the only place domain rules live.
+- SQLite / Cloudflare D1 は accepted persistence direction。
+- Drizzle ORM は accepted ORM direction。
+- schema と migration plan は再現可能で reviewable にする。
+- DB constraint は domain invariant を補助できるが、domain rule が存在する唯一の場所にしない。
 
-## Offline And Sync Data
+## オフラインと同期データ
 
-- Treat local/offline data as a specialized representation.
-- Define sync item lifecycle, conflict resolution, idempotency, and cleanup.
-- Do not leak IndexedDB/local cache schema into public domain APIs without a transformation layer.
+- local/offline data は specialized representation として扱う。
+- sync item lifecycle、conflict resolution、idempotency、cleanup を定義する。
+- transformation layer なしで IndexedDB/local cache schema を public domain API に漏らさない。
 
-## Review Checks
+## レビューチェック
 
-- Does the DB design follow DDD aggregate ownership?
-- Does it support required query patterns without compromising write consistency?
-- Are migration, rollback, seed/test data, and retention/anonymization needs clear?
-- Are D1 limits and edge runtime constraints considered?
+- DB design は DDD aggregate ownership に従っているか。
+- write consistency を損なわずに required query pattern を支えられるか。
+- migration、rollback、seed/test data、retention/anonymization need は明確か。
+- D1 limit と edge runtime constraint は考慮されているか。
 
-## Source Docs
+## 出典ドキュメント
 
 - `../your-quiz/docs/instructions/shared/workflow/05.01_db-design.md`
 - `../your-quiz/docs/project/architecture/data-architecture.md`

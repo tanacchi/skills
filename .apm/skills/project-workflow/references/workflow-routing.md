@@ -1,38 +1,38 @@
-# Workflow Routing: Your Quiz
+# ワークフロー振り分け: Your Quiz
 
-## Phase Map
+## 工程マップ
 
-| Phase | Primary skill | Main output | Completion signal |
+| 工程 | 主 skill | 主成果物 | 完了シグナル |
 | --- | --- | --- | --- |
-| Common policy / scope | `project-workflow` | Work classification, scope, questions | Required inputs and scope boundaries are explicit. |
-| Specification | `specification-design` | Requirements, user stories, success/error scenarios | 5W1H, acceptance criteria, open questions are clear. |
-| Architecture / tech selection | `architecture-design` | Architecture, NFR, ADR proposal | Tradeoffs, selected stack, NFR impact are documented. |
-| DDD design | `ddd-design` | Ubiquitous language, BCs, aggregates, events | Context boundaries and invariants are testable. |
-| UI design | `frontend-ui-design` | Sitemap, flow, wireframe, components | Mobile-first states and DDD/API alignment are clear. |
-| API design | `api-design` | TypeSpec, API catalog, OpenAPI | Contract is schema-first and context-aligned. |
-| DB / data design | `architecture-design` | Data model, migration direction, constraints | Aggregate boundaries and persistence boundaries are mapped. |
-| BDD/API tests | `testing-quality` | PactumJS executable specs | Business scenarios are red before implementation. |
-| Skeleton / implementation | `api-implementation` or implementation-specific skill | Compile-ready structure and production code | Typecheck passes and contracts are honored. |
-| Unit / mutation tests | `testing-quality` | Vitest tests, mutation analysis | Coverage and mutation quality gates are met or justified. |
-| E2E tests | `testing-quality` / `frontend-ui-design` | Playwright scenarios | UI/API/DB flow is verified for key journeys. |
+| 共通方針 / scope | `project-workflow` | 作業分類、scope、確認事項 | 必須入力と scope 境界が明確。 |
+| 仕様整理 | `specification-design` | 要件、user story、success/error scenario | 5W1H、acceptance criteria、open question が明確。 |
+| アーキテクチャ/技術選定 | `architecture-design` | architecture、NFR、ADR proposal | tradeoff、selected stack、NFR impact が文書化されている。 |
+| DDD 設計 | `ddd-design` | ubiquitous language、BC、aggregate、event | context 境界と invariant を test 可能にする。 |
+| UI 設計 | `frontend-ui-design` | sitemap、flow、wireframe、component | mobile-first state と DDD/API alignment が明確。 |
+| API 設計 | `api-design` | TypeSpec、API catalog、OpenAPI | contract が schema-first で context と揃っている。 |
+| DB / data 設計 | `architecture-design` | data model、migration 方針、constraint | aggregate 境界と persistence 境界が対応付けられている。 |
+| BDD/API test | `testing-quality` | PactumJS executable spec | business scenario が実装前に red になる。 |
+| skeleton / implementation | `api-implementation` or implementation-specific skill | compile 可能な構造と production code | typecheck が通り、contract が守られている。 |
+| unit / mutation test | `testing-quality` | Vitest test、mutation analysis | coverage と mutation quality gate が満たされるか、未達理由が明示されている。 |
+| E2E test | `testing-quality` / `frontend-ui-design` | Playwright scenario | 主要 journey の UI/API/DB flow が検証されている。 |
 
-## Routing Rules
+## 振り分けルール
 
-- Start new feature work from specification unless the user explicitly scopes it as a local fix.
-- Move forward only when the previous phase output is available or the missing output is recorded as an assumption.
-- If a task crosses phases, split the work and name the phase currently being executed.
-- If the user asks for implementation but API/DDD/contract is missing, identify the missing design artifact before coding.
-- Keep work story-sized; avoid broad multi-feature design or implementation batches.
+- user が local fix と明示しない限り、新機能は specification から始める。
+- 前工程の成果物がある場合、または不足分を assumption として記録した場合だけ次へ進む。
+- task が複数工程にまたがる場合は作業を分け、いま実行している工程名を明示する。
+- user が implementation を求めていても API/DDD/contract が不足している場合は、coding 前に不足している design artifact を特定する。
+- 作業は story-sized に保ち、広すぎる multi-feature design や implementation batch を避ける。
 
-## Completion Checks
+## 完了チェック
 
-- Requirements are traceable to scenarios, APIs, UI states, and tests.
-- DDD context and aggregate boundaries are not contradicted by API or DB design.
-- Generated artifacts are identified as generated; hand edits to generated OpenAPI are avoided.
-- ADRs are proposed for durable architecture or technology decisions.
-- Future Work captures deferred scope instead of hiding it inside implementation notes.
+- requirement が scenario、API、UI state、test へ追跡できる。
+- DDD context と aggregate boundary が API や DB design と矛盾していない。
+- generated artifact は generated と分かるようにし、generated OpenAPI の手編集を避ける。
+- 長く残る architecture / technology decision には ADR が提案されている。
+- deferred scope は implementation note に隠さず 将来課題 に記録する。
 
-## Source Docs
+## 出典ドキュメント
 - `../your-quiz/docs/instructions/shared/workflow/00.01_common.md`
 - `../your-quiz/docs/instructions/shared/workflow/00.02_workflow.md`
 - `../your-quiz/docs/instructions/shared/workflow/00.05_scope-confirmation.md`

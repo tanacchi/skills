@@ -1,34 +1,34 @@
-# Docs And ADR Management: Your Quiz
+# Docs と ADR 管理: Your Quiz
 
-## Documentation Rules
+## ドキュメントルール
 
-- Keep project facts in `docs/project/`; keep reusable instructions in `docs/instructions/`.
-- Keep phase-specific output in the phase directory documented by the workflow guide.
-- Preserve traceability from requirements to DDD, API, UI, tests, and ADRs.
-- Update docs when a behavior, interface, context boundary, non-functional target, or public workflow changes.
-- Do not copy long source docs into multiple places. Summarize once and link source docs.
+- project fact は `docs/project/` に置き、再利用可能な instruction は `docs/instructions/` に置く。
+- 工程固有の成果物は workflow guide が示す工程ディレクトリに置く。
+- requirement から DDD、API、UI、test、ADR までの traceability を保つ。
+- behavior、interface、context boundary、non-functional target、public workflow が変わる場合は docs を更新する。
+- 長い source docs を複数箇所にコピーしない。一度だけ要約し、source docs へ link する。
 
-## ADR Rules
+## ADR ルール
 
-- Create or update an ADR for architecture pattern, technology selection, data/storage strategy, API style, hosting, non-functional strategy, or durable cross-team rule.
-- New ADRs start as `Proposed`; only mark `Accepted` after explicit approval or existing documented status.
-- ADR file names use a zero-padded number and concise English slug.
-- Update ADR index/readme when ADRs are added or status changes.
-- If current work contradicts an accepted ADR, do not silently overwrite the decision. Propose a superseding ADR.
+- architecture pattern、technology selection、data/storage strategy、API style、hosting、non-functional strategy、長く残る cross-team rule には ADR を作成または更新する。
+- 新規 ADR は `Proposed` から始め、明示承認または既存文書上の status がある場合だけ `Accepted` にする。
+- ADR file name は zero-padded number と短い English slug を使う。
+- ADR の追加または status 変更時は ADR index/readme を更新する。
+- 現在の作業が accepted ADR と矛盾する場合、判断を黙って上書きしない。superseding ADR を提案する。
 
-## Future Work Rules
+## 将来課題 ルール
 
-- Move deferred requirements to Future Work when they are real but outside the current scope.
-- Do not use Future Work to hide incomplete acceptance criteria for the current story.
-- Mark uncertainty as open questions rather than project facts.
+- 実在するが今回 scope 外の要求は 将来課題 に移す。
+- 現在の story に必要な未完了 acceptance criteria を 将来課題 に隠さない。
+- 不確実な内容は project fact ではなく open question として記録する。
 
-## Safety Rules
+## 安全ルール
 
-- Do not add secrets, tokens, or machine-specific absolute paths.
-- Do not use `docs/tmp` as source of truth unless an adoption decision is documented.
-- Do not read or summarize restricted test quiz files under `docs/instructions/shared/tests/` unless the user explicitly instructs it; README warnings are enough for skill guidance.
+- secrets、tokens、machine-specific absolute paths を追加しない。
+- 採用判断が文書化されていない限り、`docs/tmp` を source of truth にしない。
+- ユーザーが明示しない限り、`docs/instructions/shared/tests/` 配下の制限付き quiz file を読んだり要約したりしない。skill guidance には README の警告で十分。
 
-## Source Docs
+## 出典ドキュメント
 - `../your-quiz/docs/instructions/shared/workflow/00.03_docs.md`
 - `../your-quiz/docs/instructions/shared/workflow/00.04_adr-management.md`
 - `../your-quiz/docs/project/adr/README.md`

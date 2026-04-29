@@ -1,38 +1,38 @@
-# Project Facts: Your Quiz
+# プロジェクト基本情報: Your Quiz
 
-## Product
+## プロダクト
 
-- Product name: Your Quiz.
-- Vision: いつでもどこでも、手軽にクイズ学習。
-- Core value: 匿名で手軽に始められ、スワイプ中心の回答体験で学習効率を上げる。
-- Primary user: ログインなしでクイズを解きたい学習者。作成・承認・履歴確認も扱う。
-- Primary environment: smartphone browser, mobile-first, PWA/offline support.
+- プロダクト名: Your Quiz。
+- vision: いつでもどこでも、手軽にクイズ学習。
+- core value: 匿名で手軽に始められ、スワイプ中心の回答体験で学習効率を上げる。
+- 主要ユーザー: ログインなしでクイズを解きたい学習者。作成・承認・履歴確認も扱う。
+- 主要実行環境: smartphone browser、mobile-first、PWA/offline support。
 
-## Technology
+## 技術スタック
 
-- Frontend: Next.js 15 App Router, Tailwind CSS, Jotai.
-- Backend: Hono on Cloudflare Workers, TypeScript.
-- Persistence: SQLite / Cloudflare D1, Drizzle ORM.
-- API schema: TypeSpec, OpenAPI generation, openapi-typescript SDK/type generation.
-- Testing: PactumJS for BDD/API, Vitest for unit/TDD, Playwright for E2E, Stryker for mutation testing.
-- API style: REST-first, with ADR-0021 field selection / union response strategy where needed.
+- フロントエンド: Next.js 15 App Router, Tailwind CSS, Jotai.
+- バックエンド: Hono on Cloudflare Workers, TypeScript.
+- persistence: SQLite / Cloudflare D1、Drizzle ORM。
+- API schema: TypeSpec、OpenAPI generation、openapi-typescript SDK/type generation。
+- テスト: BDD/API は PactumJS、unit/TDD は Vitest、E2E は Playwright、mutation testing は Stryker。
+- API style: REST-first。必要に応じて ADR-0021 の field selection / union response strategy を使う。
 
-## Non-Functional Targets
+## 非機能目標
 
-- API response: p95 100ms for core operations unless a narrower API-specific target exists.
-- UI: 375px mobile-first, 44px minimum touch targets.
-- Availability: monthly 99.5% target with offline mode for degraded network conditions.
-- Security: anonymous session model, JWT/device identification where applicable, sanitized user content.
-- Data retention: approved quizzes are durable; answer history is anonymized after the documented retention period.
+- API response: API 固有のより狭い target がない限り、core operation は p95 100ms。
+- UI: 375px mobile-first、44px 以上の touch target。
+- availability: monthly 99.5% target。degraded network condition には offline mode で対応する。
+- セキュリティ: anonymous session model, JWT/device identification where applicable, sanitized user content.
+- データ保持: 承認済みクイズは永続化し、回答履歴は文書化された保持期間後に匿名化する。
 
-## Common Design Pressure
+## 共通の設計圧力
 
-- Keep anonymous use simple while preserving creator/session permissions.
-- Keep quiz answering fast; avoid adding cross-context joins to the hot path.
-- Treat offline sync as a specialized context instead of scattering sync logic across all features.
-- Preserve TypeScript type safety from TypeSpec through runtime validation and domain logic.
+- 作成者/セッション権限を保ちながら、匿名利用はシンプルに保つ。
+- クイズ回答を高速に保ち、hot path に context 横断 join を追加しない。
+- offline sync は全 feature に sync logic を散らさず、specialized context として扱う。
+- TypeSpec から runtime validation と domain logic まで TypeScript type safety を保つ。
 
-## Source Docs
+## 出典ドキュメント
 - `../your-quiz/docs/project/specifications/requirements/requirements-quiz.md`
 - `../your-quiz/docs/project/specifications/user-stories/user-story-quiz.md`
 - `../your-quiz/docs/project/architecture/system-overview.md`

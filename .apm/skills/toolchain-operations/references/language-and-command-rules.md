@@ -1,32 +1,32 @@
-# Language And Command Rules: Your Quiz
+# 言語とコマンドルール: Your Quiz
 
 ## Markdown
 
-- Keep docs structured for downstream agents: purpose, constraints, output, completion criteria where workflow docs require it.
-- Prefer concise checklists and traceable source links over copied long explanations.
-- Keep Source Docs references accurate when summarizing docs into skills.
+- workflow docs が求める場合、downstream agent 向けに purpose、constraints、output、completion criteria が分かる構造にする。
+- 長い説明のコピーより、簡潔な checklist と追跡可能な source link を優先する。
+- docs を skill に要約するときは 出典ドキュメント reference を正確に保つ。
 
 ## TypeScript
 
-- Prefer strict typing and project conventions.
-- Avoid `any`, broad assertions, ignored type errors, and non-null assertions unless locally justified.
-- Keep domain, application, API, and persistence concerns separated.
-- Use generated types where API contracts already define shapes.
+- strict typing と project convention を優先する。
+- local justification がない限り、`any`、広すぎる assertion、ignored type error、non-null assertion を避ける。
+- domain、application、API、persistence の concern を分離する。
+- API contract が shape を定義済みの場合は generated type を使う。
 
 ## TypeSpec
 
-- Keep schema-first API definitions in TypeSpec.
-- Generated OpenAPI and generated TypeScript types should be regenerated, not manually patched.
-- Keep namespace/model/operation organization aligned with bounded contexts.
+- schema-first API definition は TypeSpec に置く。
+- generated OpenAPI と generated TypeScript types は手 patch ではなく再生成する。
+- namespace/model/operation の構成は bounded context と揃える。
 
-## Command Safety
+## コマンド安全性
 
-- Read docs and inspect state before running mutating commands.
+- mutating command 実行前に docs を読み、状態を確認する。
 - Distinguish validation commands from rewriting commands.
 - Network or install commands may require approval in restricted environments.
 - Never expose secrets in command output, test fixtures, or docs.
 
-## Source Docs
+## 出典ドキュメント
 
 - `../your-quiz/docs/instructions/shared/languages/markdown.md`
 - `../your-quiz/docs/instructions/shared/languages/typescript.md`

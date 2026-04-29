@@ -1,46 +1,46 @@
-# Domain API UI Map: Your Quiz
+# Domain/API/UI マップ: Your Quiz
 
-Use this map to keep feature work vertically aligned from domain model to API to UI. Endpoint names are catalog-level routing hints; confirm exact paths in the API catalog before implementation.
+この map は feature 作業を domain model、API、UI で縦に揃えるために使う。endpoint name は catalog 上の routing hint なので、実装前に API catalog で正確な path を確認する。
 
 ## Quiz Management
 
-- Aggregate: Quiz.
-- Responsibility: quiz creation, draft handling, approval, publishing, quality checks, master data.
-- API area: quiz-management catalog, management operations for quiz submission and approval.
-- UI: quiz creation flow, created quiz management, approval flow/admin-like views.
-- Boundary risk: approval and publishing affect learning/search availability; publish via API/event boundary instead of direct model coupling.
+- aggregate: Quiz。
+- responsibility: quiz creation、draft handling、approval、publishing、quality check、master data。
+- API area: quiz-management catalog、quiz submission と approval の management operation。
+- UI: quiz creation flow、created quiz management、approval flow/admin-like view。
+- boundary risk: approval と publishing は learning/search availability に影響する。direct model coupling ではなく API/event boundary で publish する。
 
 ## Quiz Learning
 
-- Aggregate: LearningSession.
-- Responsibility: deck generation, quiz answering, answer judgement, explanation display, progress calculation.
-- API area: quiz-learning catalog, learning sessions, answers, deck/search-derived workflows.
-- UI: home/deck selection, quiz list, quiz answer page, result/history entry points.
-- Boundary risk: do not embed management approval rules in UI-only logic; consume published quiz language.
+- aggregate: LearningSession。
+- responsibility: deck generation、quiz answering、answer judgement、explanation display、progress calculation。
+- API area: quiz-learning catalog、learning session、answer、deck/search-derived workflow。
+- UI: home/deck selection、quiz list、quiz answer page、result/history entry point。
+- boundary risk: management approval rule を UI-only logic に埋め込まず、published quiz language を consume する。
 
 ## User Session
 
-- Aggregate: UserSession.
-- Responsibility: anonymous identity, session lifecycle, device identification, creator/session permissions.
-- API area: user-session catalog.
-- UI: app launch/session bootstrap, my page, answer history ownership behavior.
-- Boundary risk: session identity should be validated through application/API boundaries, not duplicated in each feature.
+- aggregate: UserSession。
+- responsibility: anonymous identity、session lifecycle、device identification、creator/session permission。
+- API area: user-session catalog。
+- UI: app launch/session bootstrap、my page、answer history ownership behavior。
+- boundary risk: session identity は application/API boundary で validate し、各 feature で重複実装しない。
 
 ## Offline Sync
 
-- Aggregate: SyncSession.
-- Responsibility: offline cache, pending changes, sync, conflict handling, local-to-server reconciliation.
-- API area: offline-sync catalog.
-- UI: offline indicators, sync status, offline-capable answer/create flows.
-- Boundary risk: sync format is an anti-corruption layer; avoid leaking internal storage shape into domain APIs.
+- aggregate: SyncSession。
+- responsibility: offline cache、pending change、sync、conflict handling、local-to-server reconciliation。
+- API area: offline-sync catalog。
+- UI: offline indicator、sync status、offline-capable answer/create flow。
+- boundary risk: sync format は anti-corruption layer。internal storage shape を domain API に漏らさない。
 
-## Cross-Cutting Maps
+## 横断マップ
 
-- Search/discovery reads published quiz data and supports learning-oriented discovery.
-- Operations endpoints support monitoring, health, metrics, and operational visibility.
-- UI integration docs connect DDD models, API contracts, components, Storybook, and automation.
+- search/discovery は published quiz data を read し、learning-oriented discovery を支援する。
+- operations endpoint は monitoring、health、metrics、operational visibility を支援する。
+- UI integration docs は DDD model、API contract、component、Storybook、automation をつなぐ。
 
-## Source Docs
+## 出典ドキュメント
 - `../your-quiz/docs/project/ddd-design/2.09_bounded-context-definition/README.md`
 - `../your-quiz/docs/project/api-design/api-catalog/README.md`
 - `../your-quiz/docs/project/api-design/design-principles.md`
