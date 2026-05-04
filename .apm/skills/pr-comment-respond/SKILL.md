@@ -77,25 +77,18 @@ git push origin <current-branch>
 **push が完了してから** 返信する。各コメントスレッドに対して 1 返信を投稿し、そのスレッドで対応したコミット ID のリンクを必ず添える。
 
 返信本文に含めるべき要素:
-- 対応したコミット ID の **GitHub リンク** (バッククォートではなく半角スペースで挟む)
+- 対応したコミット ID (半角スペースで挟む。GitHub がコメント内の SHA を自動リンクにする)
 - 変更内容の要点 (何を、なぜ変えたか)
 - Quality gates の結果
-
-コミット SHA とリンクの組み立て:
-
-```bash
-SHORT_SHA=$(git rev-parse --short HEAD)
-FULL_SHA=$(git rev-parse HEAD)
-REPO=$(git remote get-url origin | sed 's|.*github.com[/:]||' | sed 's|\.git$||')
-LINK="[${SHORT_SHA}](https://github.com/${REPO}/commit/${FULL_SHA})"
-```
 
 インラインコメントへの返信は **必ず JSON ファイル経由**で行う (backtick をシェルが解釈するのを防ぐため)。
 
 ```bash
-cat > /tmp/reply.json << 'EOF'
-{"body": "対応しました ( [abc1234](https://github.com/owner/repo/commit/abc1234fullsha) )。\n\n<変更内容の要点>。\n\n全ゲート (typecheck / lint / test / build) グリーン確認済みです。"}
-EOF
+SHA=$(git rev-parse --short HEAD)
+
+cat > /tmp/reply.json << JSONEOF
+{"body": "対応しました ( ${SHA} )。\n\n<変更内容の要点>。\n\n全ゲート (typecheck / lint / test / build) グリーン確認済みです。"}
+JSONEOF
 
 gh api repos/{owner}/{repo}/pulls/{N}/comments/{comment-id}/replies \
   --method POST \
@@ -120,7 +113,7 @@ gh api repos/{owner}/{repo}/pulls/{N}/comments/{comment-id}/replies \
 - **返信は push 後**。push 前のコミット SHA をリンクに含めても GitHub 上でリンク切れになる。
 - **1 スレッドに 1 返信**。同一スレッドに複数回返信しない。
 - 返信文中の backtick を含む文字列は **JSON ファイル経由**で渡す (`--field body=` では bash がバッククォートを解釈する)。
-- コミット ID は `[sha](url)` 形式でリンク化し、半角スペースで囲む。バッククォートは使わない。
+- コミット ID は半角スペースで囲む (`( abc1234 )`)。GitHub がコメント内の SHA を自動リンクするため、フル URL は不要。バッククォートは使わない。
 - `--no-verify` で commit hook を skip しない。
 - テストを skip・削除して gate を通過させない。根本解決のみ。
 

@@ -15,27 +15,16 @@ gh pr view {N} --json reviews,comments \
 gh pr list --head "$(git branch --show-current)" --json number,url,title
 ```
 
-## コミット SHA とリンクの組み立て
-
-push 後に実行すること (push 前は SHA がリモートに存在しない)。
-
-```bash
-SHORT_SHA=$(git rev-parse --short HEAD)
-FULL_SHA=$(git rev-parse HEAD)
-# https://github.com/owner/repo.git → owner/repo
-REPO=$(git remote get-url origin | sed 's|.*github.com[/:]||' | sed 's|\.git$||')
-# 返信本文に埋め込むリンク文字列 (半角スペースで挟む)
-LINK="[${SHORT_SHA}](https://github.com/${REPO}/commit/${FULL_SHA})"
-```
-
 ## コメントへの返信
 
 backtick 問題を避けるため JSON ファイル経由で渡す。
-コミット ID は `[sha](url)` 形式でリンク化し、半角スペースで囲む。
+コミット ID は半角スペースで囲むだけでよい。GitHub PR コメントは SHA を自動リンクするためフル URL は不要。
 
 ```bash
-cat > /tmp/reply.json << 'JSONEOF'
-{"body": "対応しました ( [abc1234](https://github.com/owner/repo/commit/abc1234fullsha) )。\n\n変更内容の要点。\n\n全ゲート (typecheck / lint / test / build) グリーン確認済みです。"}
+SHA=$(git rev-parse --short HEAD)
+
+cat > /tmp/reply.json << JSONEOF
+{"body": "対応しました ( ${SHA} )。\n\n変更内容の要点。\n\n全ゲート (typecheck / lint / test / build) グリーン確認済みです。"}
 JSONEOF
 
 gh api repos/{owner}/{repo}/pulls/{N}/comments/{comment-id}/replies \
