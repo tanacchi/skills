@@ -141,6 +141,93 @@ function toUserId(id: string): UserId {
 
 ---
 
+## テストコード固有の `as` — 代替パターン集
+
+テストで頻出する `as` キャストにも必ず代替がある。
+「テストだから `as` OK」はポリシー違反。
+
+### ブラウザ API のモック (`navigator as unknown as T`)
+
+```ts
+// NG: double assertion で型システムを完全に騙している
+const nav = navigator as unknown as { vibrate?: (p: number[]) => boolean };
+nav.vibrate = vi.fn();
+
+// OK: vi.stubGlobal は value: unknown を受け取るため assertion 不要
+vi.stubGlobal('navigator', { ...navigator, vibrate: vi.fn().mockReturnValue(true) });
+afterEach(() => vi.unstubAllGlobals());
+```
+
+**ポイント**: `vi.stubGlobal(name, value: unknown)` は任意の値を受け付けるため、
+navigator / window など読み取り専用グローバルの mock にキャスト不要で対応できる。
+
+---
+
+### `it.each` のタプル narrowing (`[...] as [T, U][]`)
+
+```ts
+// NG: タプル型への assertion
+it.each([
+  ['tap', [10]],
+  ['success', [20, 40, 20]],
+] as [HapticPattern, number[]][])(...)
+
+// OK: 型付き const として宣言
+const cases: ReadonlyArray<readonly [HapticPattern, readonly number[]]> = [
+  ['tap', [10]],
+  ['success', [20, 40, 20]],
+];
+it.each(cases)('forwards %s', (label, ms) => { ... });
+```
+
+---
+
+### DOM クエリ結果のキャスト (`element as HTMLElement`)
+
+```ts
+// NG: getByTestId は Element を返すが getAttribute は HTMLElement のメソッドとして as で黙らせる
+const style = (screen.getByTestId('x') as HTMLElement).getAttribute('style');
+
+// OK: @testing-library の getByTestId は既に HTMLElement を返す — キャスト不要
+const style = screen.getByTestId('x').getAttribute('style');
+
+// もし Element しか返ってこない API を使う場合 → instanceof で narrowing
+const el = document.getElementById('root');
+if (el instanceof HTMLInputElement) {
+  el.value; // 安全
+}
+```
+
+---
+
+### Zod バリデーション境界テスト (`{...} as Action`)
+
+Server Action などランタイムバリデーションを行う関数に**意図的に不正な値**を渡してテストしたいとき、
+呼び出し側の型を widening することで `as` が不要になる。
+
+```ts
+// NG: テスト専用の double assertion でコンパイラを欺く
+await dispatch(state, { type: 'SUBMIT_OUTPUT_A', letters: 'too-long' } as Action);
+
+// OK: シグネチャに generic + extends 境界を加え、tests はキャスト不要にする
+// dispatch.ts
+type DispatchInput = Action | { readonly type: string };
+export async function dispatch<T extends DispatchInput>(state: GameState, raw: T): Promise<Event[]> {
+  const parsed = ActionSchema.safeParse(raw); // Zod が SSOT
+  // ...
+}
+
+// dispatch.spec.ts — キャスト不要
+await dispatch(state, { type: 'SUBMIT_OUTPUT_A', letters: 'too-long' }); // Zod が実行時に弾く
+await dispatch(state, { type: 'UNKNOWN' });                               // { type: string } 側にマッチ
+```
+
+**使いどころ**: `raw` を Zod で検証するため型上の `Action` 制約は `as` で黙らせる必要がない。
+`generic + extends (UnionType | { type: string })` で呼び出し側の型安全性 (Action の補完) と
+テストの柔軟性 (不正値の注入) を両立する。
+
+---
+
 ## ADR 起票時の記載項目
 
 ADR を起票する場合、以下を記載する:
