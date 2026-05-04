@@ -17,13 +17,17 @@ gh pr list --head "$(git branch --show-current)" --json number,url,title
 
 ## コメントへの返信
 
+backtick 問題を避けるため JSON ファイル経由で渡す。
+コミット ID は半角スペースで囲むだけでよい。GitHub PR コメントは SHA を自動リンクするためフル URL は不要。
+
 ```bash
-# backtick 問題を避けるため JSON ファイル経由で渡す
-cat > /tmp/reply.json << 'JSONEOF'
-{"body": "対応しました (`abc1234`)。\n\n変更内容の要点。"}
+SHA=$(git rev-parse --short HEAD)
+
+cat > /tmp/reply.json << JSONEOF
+{"body": "対応しました ( ${SHA} )。\n\n変更内容の要点。\n\n全ゲート (typecheck / lint / test / build) グリーン確認済みです。"}
 JSONEOF
 
-gh api repos/{owner}/{repo}/pulls/comments/{comment-id}/replies \
+gh api repos/{owner}/{repo}/pulls/{N}/comments/{comment-id}/replies \
   --method POST \
   --input /tmp/reply.json
 ```

@@ -4,7 +4,7 @@ description: Use this skill when addressing review comments on a pull request �
 license: MIT
 metadata:
   author: personal
-  version: "0.1.0"
+  version: "0.2.0"
 compatibility: Requires git, gh CLI (authenticated), and a project with defined quality-gate commands.
 ---
 
@@ -63,27 +63,37 @@ pnpm typecheck && pnpm lint && pnpm test && pnpm build
 
 ### 4. コミットとプッシュ
 
+**1 コメントスレッド = 1 コミット** を原則とする。複数コメントが同一ファイルに絡む場合は例外的にまとめる。
+
 - コミットメッセージに「Resolves: PR #N review comment on <path>:<line>」を入れて追跡可能にする。
-- `git push origin <current-branch>` でリモートに反映する。
+- **コミット後、必ず push してから** 次の返信ステップへ進む。push 前に返信すると SHA がリモートに存在しない状態になる。
+
+```bash
+git push origin <current-branch>
+```
 
 ### 5. コメントへの返信
+
+**push が完了してから** 返信する。各コメントスレッドに対して 1 返信を投稿し、そのスレッドで対応したコミット ID のリンクを必ず添える。
+
+返信本文に含めるべき要素:
+- 対応したコミット ID (半角スペースで挟む。GitHub がコメント内の SHA を自動リンクにする)
+- 変更内容の要点 (何を、なぜ変えたか)
+- Quality gates の結果
 
 インラインコメントへの返信は **必ず JSON ファイル経由**で行う (backtick をシェルが解釈するのを防ぐため)。
 
 ```bash
-cat > /tmp/reply.json << 'EOF'
-{"body": "対応しました (`<commit-sha>`)。\n\n<変更内容の要点>。\n\n全ゲート (typecheck / lint / test / build) グリーン確認済みです。"}
-EOF
+SHA=$(git rev-parse --short HEAD)
 
-gh api repos/{owner}/{repo}/pulls/comments/{comment-id}/replies \
+cat > /tmp/reply.json << JSONEOF
+{"body": "対応しました ( ${SHA} )。\n\n<変更内容の要点>。\n\n全ゲート (typecheck / lint / test / build) グリーン確認済みです。"}
+JSONEOF
+
+gh api repos/{owner}/{repo}/pulls/{N}/comments/{comment-id}/replies \
   --method POST \
   --input /tmp/reply.json
 ```
-
-返信本文に含めるべき要素:
-- 対応したコミット SHA (バッククォート囲み)
-- 変更内容の要点 (何を、なぜ変えたか)
-- Quality gates の結果
 
 ### 6. 完了報告
 
@@ -100,9 +110,11 @@ gh api repos/{owner}/{repo}/pulls/comments/{comment-id}/replies \
 
 - コメント内容が曖昧な場合は **推測で実装しない**。AskUserQuestion で確認する。
 - quality gates が赤のままコミット・返信しない。
+- **返信は push 後**。push 前のコミット SHA をリンクに含めても GitHub 上でリンク切れになる。
+- **1 スレッドに 1 返信**。同一スレッドに複数回返信しない。
 - 返信文中の backtick を含む文字列は **JSON ファイル経由**で渡す (`--field body=` では bash がバッククォートを解釈する)。
+- コミット ID は半角スペースで囲む (`( abc1234 )`)。GitHub がコメント内の SHA を自動リンクするため、フル URL は不要。バッククォートは使わない。
 - `--no-verify` で commit hook を skip しない。
-- 1 コメントが複数ファイルに影響する場合、まとめて 1 コミットにする方が履歴が読みやすい。
 - テストを skip・削除して gate を通過させない。根本解決のみ。
 
 ## Related References
