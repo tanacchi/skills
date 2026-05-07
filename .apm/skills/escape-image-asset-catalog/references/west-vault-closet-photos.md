@@ -1,17 +1,17 @@
-# West — クローゼット・金庫・写真 詳細
+# West — クローゼット・金庫・紙・QR 詳細
 
-> **重要**: inventory PR (2026-05) 以降、状態キーが短縮形に変更された。
-> `'closet-closed'` → `'closed'`、`'closet-open'` → `'open'`、`'closet-open-vault-seen'` → `'open-vault-seen'`
-> 旧キーを書いたコードは Biome/TypeScript で型エラーになる。
+West 方位は現行表示用 9 枚 + 旧版参照 2 枚の合計 11 枚。実装では可能なら `room_west_with_rubbing_paper.webp` と `open-closet-with-qr2.webp` を使い、旧版は参照用途に寄せる。
+
+> **重要**: 状態キーは短縮形を使う。`closed` / `open` / `open-vault-seen` が正。
 
 ## 状態遷移マップ
 
 ```
-room_west_paper_removed  (初期: west-closet = 'closed')
+room_west_with_rubbing_paper  (初期: west-closet = 'closed')
   │
   ├─ [扉タップ (closet-doors)]
   ▼
-open-closet  (west-closet = 'open' / 中段に電子金庫が見える)
+open-closet-with-qr2  (west-closet = 'open' / 中段に電子金庫、棚に QR2)
   │         ↑
   │    [扉エッジ/上部タップ (closet-close-edge-left/right / closet-close-top)]
   │    → 'closed' へ戻る (逆遷移あり)
@@ -52,15 +52,15 @@ west-closet = 'open-vault-seen' → [扉エッジ/上部タップ] → 'closed' 
 // location: { kind: 'fixture', fixtureId: 'west-yellow-vault' } → { kind: 'inventory' }
 ```
 
-状態→画像 src の解決は `FIXTURES[id].views[state].image` で行う:
+状態→画像 src の解決は `FIXTURES[id].views[state].image` で行う。現行アセットを使う場合:
 
 ```ts
 // src/entities/game/world/definitions.ts の FIXTURES テーブルより
 'west-closet': {
   room: 'W',
   views: {
-    'closed':          { image: '/rooms/west/room_west_paper_removed.webp' },
-    'open':            { image: '/rooms/west/open-closet.webp' },
+    'closed':          { image: '/rooms/west/room_west_with_rubbing_paper.webp' },
+    'open':            { image: '/rooms/west/open-closet-with-qr2.webp' },
     'open-vault-seen': { image: '/rooms/west/vault-A-already-vault.webp' },
   },
 },
@@ -89,13 +89,15 @@ export const vaultCloseupImageAtom = atom((get) =>
 
 ---
 
-## 画像一覧 (ルーム全景 3 枚)
+## 画像一覧 (ルーム全景 5 枚)
 
 | ファイル | サイズ | 解像度 | 状態キー | 用途 |
 |---|---|---|---|---|
-| `public/rooms/west/room_west_paper_removed.webp` | 16KB | 1408×768 | `'closed'` | west 方位初期背景 |
-| `public/rooms/west/open-closet.webp` | 24KB | 1408×768 | `'open'` | クローゼット開扉後の全景 |
-| `public/rooms/west/vault-A-already-vault.webp` | 24KB | 1408×768 | `'open-vault-seen'` | 金庫を一度確認した後の全景 |
+| `public/rooms/west/room_west_with_rubbing_paper.webp` | - | 1408x768 | `'closed'` | 現行初期背景、床に凸凹紙あり |
+| `public/rooms/west/open-closet-with-qr2.webp` | - | 1408x768 | `'open'` | 現行開扉背景、棚に QR2 あり |
+| `public/rooms/west/vault-A-already-vault.webp` | 24KB | 1408x768 | `'open-vault-seen'` | 金庫を一度確認した後の全景 |
+| `public/rooms/west/room_west_paper_removed.webp` | 16KB | 1408x768 | - | 旧版、凸凹紙なし |
+| `public/rooms/west/open-closet.webp` | 24KB | 1408x768 | - | 旧版、QR2 なし |
 
 ### ホットスポット座標 (aspect-ratio: 1408 / 768)
 
@@ -119,9 +121,17 @@ export const vaultCloseupImageAtom = atom((get) =>
 
 | ファイル | サイズ | 解像度 | 状態 | 説明 |
 |---|---|---|---|---|
-| `public/rooms/west/vault-A.webp` | 80KB | 896×1195 | `'locked'` | テンキーパッド・READY/ERRORランプが見える |
-| `public/rooms/west/open-vault.webp` | 52KB | 896×1195 | `'open'` | 内部に写真群が見える |
-| `public/rooms/west/get-photos-from-vault.webp` | 32KB | 896×1195 | `'empty'` | 内部空、写真取得済み |
+| `public/rooms/west/vault-A.webp` | 80KB | 896x1195 | `'locked'` | テンキーパッド・READY/ERROR ランプが見える |
+| `public/rooms/west/open-vault.webp` | 52KB | 896x1195 | `'open'` | 内部に写真群が見える |
+| `public/rooms/west/get-photos-from-vault.webp` | 32KB | 896x1195 | `'empty'` | 内部空、写真取得済み |
+
+## 画像一覧 (紙 / QR close-up 3 枚)
+
+| ファイル | 解像度 | 状態 / 説明 | Prompt |
+|---|---:|---|---|
+| `public/rooms/west/rubbing-paper-blank.webp` | 1024x1024 | 擦り出し前の凸凹紙 | W-01 |
+| `public/rooms/west/rubbing-paper-revealed.webp` | 1024x1024 | 擦り出し後、`0225` が出現 | W-02 |
+| `public/rooms/west/qr2-closeup.webp` | 1024x1024 | QR2 close-up | W-03 |
 
 ---
 
@@ -203,3 +213,22 @@ dispatch({ type: 'COLLECT_ITEM', itemId: 'photos-yellow' });
 open-vault.webp に写る写真の内容:
 - **大判プリント**: 空港ターミナルで複数人が歩く場面。「おかえりまりえ」のサインボード。
 - **ヴィンテージ写真複数枚**: 家族写真・海外の海辺など。これらは後続ステージで使用。
+
+## TypeScript src テーブル例
+
+```ts
+type WestRoomState = 'closed' | 'open' | 'open-vault-seen';
+type WestVaultState = 'locked' | 'open' | 'empty';
+
+const WEST_ROOM_SRC = {
+  closed: '/rooms/west/room_west_with_rubbing_paper.webp',
+  open: '/rooms/west/open-closet-with-qr2.webp',
+  'open-vault-seen': '/rooms/west/vault-A-already-vault.webp',
+} as const satisfies Record<WestRoomState, string>;
+
+const WEST_VAULT_SRC = {
+  locked: '/rooms/west/vault-A.webp',
+  open: '/rooms/west/open-vault.webp',
+  empty: '/rooms/west/get-photos-from-vault.webp',
+} as const satisfies Record<WestVaultState, string>;
+```
