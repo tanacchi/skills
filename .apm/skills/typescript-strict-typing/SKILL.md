@@ -83,3 +83,4 @@ TypeScript コードに対して、リテラル narrowing・`satisfies` によ�
 - `references/forbidden-assertions.md` — 各 assertion の禁止理由と正しい代替
 - `references/type-tests.md` — `expectTypeOf` 活用と `@ts-expect-error` との使い分け
 - `references/typescript-version-tracking.md` — 最新版確認手順と upgrade 時 checklist
+- `references/zod-strict-typing.md` — Zod v4 の `z.literal` 配列引数・`exactOptionalPropertyTypes` との整合・`satisfies z.ZodType<T>`・localStorage safeParse パターン
