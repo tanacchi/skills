@@ -55,3 +55,4 @@ Your Quiz の BDD/API、unit、mutation、E2E、test gap 分析、品質ゲー�
 - `references/bdd-and-e2e.md`
 - `references/unit-and-mutation-testing.md`
 - `references/quiz-development-rules.md`
+- `references/v8-ignore-placement.md` — v8 coverage の `/* v8 ignore next N */` 位置ルールと exhaustive switch の正解パターン
