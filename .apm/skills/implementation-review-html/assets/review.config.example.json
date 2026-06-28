@@ -1,0 +1,13 @@
+{
+  "title": "プロジェクト名",
+  "storeKey": "myproject-review-comments",
+  "categories": ["バグ", "設計", "デザイン", "文言", "提案"],
+  "priorities": ["高", "中", "低"],
+  "imageBase": "..",
+  "images": {
+    "home_desktop": "e2e/vrt/home.vrt.ts-snapshots/home-desktop-darwin.png",
+    "home_mobile": "e2e/vrt/home.vrt.ts-snapshots/home-mobile-darwin.png",
+    "detail_mobile": "e2e/vrt/detail.vrt.ts-snapshots/detail-mobile-darwin.png",
+    "result_desktop": "e2e/vrt/result.vrt.ts-snapshots/result-desktop-darwin.png"
+  }
+}
