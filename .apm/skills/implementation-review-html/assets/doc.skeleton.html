@@ -1,0 +1,213 @@
+<!--
+  doc.skeleton.html — レビュー本文の雛形。これを review/doc.html にコピーして中身を埋める。
+
+  ルール:
+  - 各 <section> には必ず安定した id と data-title を付ける。
+    id はコメントのアンカーになり、data-title は書き出す JSON の "section" になる。
+    途中で id を変えると、既に付いたコメントの再アンカーが外れるので確定後は変えない。
+  - 見出しは <h2><span class="no">N</span> タイトル</h2> 形式。サブ見出しは <h3>。
+  - スクショは <img class="shot" data-img="キー" />。キーは review.config.json の images と一致させる。
+  - 章立てはプロジェクトに合わせて足し引きしてよい。下記は「実装レビュー」の標準セット。
+  - コード抜粋・図・表で「読めば設計が分かる」状態にするのが目的。文章だけにしない。
+  - 利用できる CSS コンポーネントの一覧と例は references/authoring-guide.md を参照。
+-->
+
+<section id="overview" data-title="0. 概要">
+  <div class="hero">
+    <h2><span class="no">0</span> 概要</h2>
+    <p class="lead">
+      <!-- 何を作ったか・狙い・現在地（CI 緑など）を 2〜3 文で。lead は少し大きめの導入文。 -->
+    </p>
+    <p>
+      <span class="tag ok">CI 緑</span>
+      <span class="tag">主要技術1</span>
+      <span class="tag">主要技術2</span>
+    </p>
+  </div>
+  <h3>このレビューの使い方</h3>
+  <ul>
+    <li>本文中の<strong>気になる箇所をマウスで範囲選択</strong>すると「💬 コメント」ボタンが出ます。</li>
+    <li>各コメントに<strong>カテゴリ</strong>と<strong>優先度</strong>を付けられます。コメントは自動でブラウザに保存されます。</li>
+    <li>レビュー後に上部の<strong>「すべて書き出す」</strong>で JSON をダウンロードしてください。それを元に改善します。</li>
+  </ul>
+</section>
+
+<section id="stack" data-title="1. 技術スタック">
+  <h2><span class="no">1</span> 技術スタック</h2>
+  <table class="grid">
+    <tr><th>領域</th><th>採用</th><th>役割</th></tr>
+    <tr><td>フレームワーク</td><td><!-- ... --></td><td><!-- ... --></td></tr>
+    <tr><td>状態管理</td><td><!-- ... --></td><td><!-- ... --></td></tr>
+    <tr><td>テスト</td><td><!-- ... --></td><td><!-- ... --></td></tr>
+  </table>
+</section>
+
+<section id="architecture" data-title="2. アーキテクチャ">
+  <h2><span class="no">2</span> アーキテクチャ</h2>
+  <p><!-- 依存方向・レイヤーの考え方を 1 段落で。図の下に必ず説明文を置く（図自体はコメント不可なので、文に指摘を貼ってもらう）。 --></p>
+
+  <!-- 依存グラフ（mermaid）。レイヤー/モジュールの依存方向を示す。 -->
+  <pre class="mermaid">
+flowchart TD
+  app --> pages --> widgets --> features --> entities --> shared
+  </pre>
+
+  <h3>モジュール構成</h3>
+  <!-- コンポーネント/モジュールの関係（mermaid graph）。 -->
+  <pre class="mermaid">
+graph LR
+  UI[UI層] --> Core[中核ロジック]
+  Core --> A[関数A]
+  Core --> B[関数B]
+  </pre>
+  <p><!-- 図の読み方・要点を文で補足（ここに指摘が付く）。 --></p>
+
+  <!-- 軽量な代替: CSS だけのレイヤー図（mermaid を使わない章で手軽に出したい時）
+  <div class="fsd">
+    <div class="lyr"><b>上位層</b><span>役割</span></div>
+    <div class="arrow">▲ 依存</div>
+    <div class="lyr"><b>下位層</b><span>役割</span></div>
+  </div> -->
+
+  <h3>設計上の重要判断</h3>
+  <p><!-- 非自明なトレードオフを「なぜそうしたか」まで書く。レビューで一番効く部分。 --></p>
+</section>
+
+<section id="tree" data-title="3. ディレクトリ構成">
+  <h2><span class="no">3</span> ディレクトリ構成</h2>
+  <!-- 注釈つきツリー。ツリーはハイライト不要なので language-plaintext を指定。 -->
+  <pre><code class="language-plaintext">src/
+  app/        # ...
+  pages/      # ...
+  ...</code></pre>
+</section>
+
+<section id="domain" data-title="4. ドメインモデル">
+  <h2><span class="no">4</span> ドメインモデル</h2>
+  <p><!-- 主要な型／データ構造。 --></p>
+  <!-- クラス図（型の構造と関連）。型が多い／関連があるならこれが効く。 -->
+  <pre class="mermaid">
+classDiagram
+  class Entity {
+    +string id
+    +number value
+  }
+  class Aggregate {
+    +Entity[] items
+  }
+  Aggregate o-- Entity
+  </pre>
+  <!-- 関連がテーブル/エンティティ寄りなら ER 図:
+  <pre class="mermaid">
+erDiagram
+  PARENT ||--o{ CHILD : has
+  </pre> -->
+  <table class="grid">
+    <tr><th>フィールド</th><th>型</th><th>意味</th></tr>
+    <tr><td><!-- ... --></td><td><!-- ... --></td><td><!-- ... --></td></tr>
+  </table>
+</section>
+
+<section id="logic" data-title="5. 中核ロジック">
+  <h2><span class="no">5</span> 中核ロジック</h2>
+  <p><!-- 配点・計算・アルゴリズムなど、このアプリの心臓。表 + 実コード抜粋。 --></p>
+  <!-- 言語クラス（language-ts / js / json / bash / python …）を付けると正確にハイライトされる。省くと自動判定。 -->
+  <pre><code class="language-ts">// 実ファイルからの抜粋（要点だけ。長すぎる場合は省略コメントを入れる）</code></pre>
+</section>
+
+<section id="state" data-title="6. 状態管理">
+  <h2><span class="no">6</span> 状態管理 / 永続化</h2>
+  <p><!-- ストア構成・永続化方式（localStorage 等）・リセット。schema 抜粋など。 --></p>
+</section>
+
+<section id="flow" data-title="7. 主要フロー">
+  <h2><span class="no">7</span> 主要フロー</h2>
+
+  <!-- 処理の登場人物と呼び出し順を見せる: シーケンス図（mermaid）。 -->
+  <pre class="mermaid">
+sequenceDiagram
+  participant U as User
+  participant V as View
+  participant S as Service
+  U->>V: 操作
+  V->>S: 呼び出し
+  S-->>V: 結果
+  V-->>U: 表示
+  </pre>
+
+  <h3>状態遷移</h3>
+  <!-- 状態を持つなら状態遷移図。 -->
+  <pre class="mermaid">
+stateDiagram-v2
+  [*] --> Idle
+  Idle --> Running: start
+  Running --> Done: finish
+  Done --> [*]
+  </pre>
+
+  <!-- 単純な一本道なら軽量な .flow でも十分:
+  <div class="flow">
+    <span class="step">入口</span><span class="sep">→</span>
+    <span class="step">処理</span><span class="sep">→</span>
+    <span class="step alt">分岐</span><span class="sep">→</span>
+    <span class="step">結果</span>
+  </div> -->
+
+  <p><!-- フローを駆動するオーケストレーション層のコード抜粋など。 --></p>
+</section>
+
+<section id="design" data-title="8. デザイン">
+  <h2><span class="no">8</span> デザイン</h2>
+  <h3>カラートークン</h3>
+  <!-- 色見本。i の background に実際の色を入れる。 -->
+  <div class="swatches">
+    <span class="sw"><i style="background:#1f7a5a"></i> brand 説明</span>
+    <span class="sw"><i style="background:#f2683c"></i> cta 説明</span>
+  </div>
+  <h3>スクリーンショット（実画面）</h3>
+  <!-- 横幅いっぱいの図 -->
+  <figure>
+    <img class="shot" data-img="home_desktop" alt="一覧（PC）" />
+    <figcaption>画面の説明</figcaption>
+  </figure>
+  <!-- SP は2枚並べ。.shots は2カラムグリッド、.sp は幅を絞る -->
+  <div class="shots">
+    <figure class="sp">
+      <img class="shot" data-img="detail_mobile" alt="詳細（SP）" />
+      <figcaption>説明</figcaption>
+    </figure>
+    <figure class="sp">
+      <img class="shot" data-img="home_mobile" alt="一覧（SP）" />
+      <figcaption>説明</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="components" data-title="9. UI コンポーネント">
+  <h2><span class="no">9</span> UI コンポーネント</h2>
+  <table class="grid">
+    <tr><th>名前</th><th>役割</th></tr>
+    <tr><td><!-- ... --></td><td><!-- ... --></td></tr>
+  </table>
+  <div class="note"><!-- 補足・規約があれば note で。 --></div>
+</section>
+
+<section id="testing" data-title="10. テスト & 品質">
+  <h2><span class="no">10</span> テスト & 品質ゲート</h2>
+  <table class="grid">
+    <tr><th>ゲート</th><th>結果</th></tr>
+    <tr><td>typecheck</td><td><span class="tag ok">緑</span></td></tr>
+    <tr><td>lint</td><td><span class="tag ok">緑</span></td></tr>
+    <tr><td>unit</td><td><span class="tag ok">緑</span> <!-- 件数・カバレッジ --></td></tr>
+  </table>
+</section>
+
+<section id="review-points" data-title="11. レビュー観点">
+  <h2><span class="no">11</span> 既知の論点 / レビュー観点</h2>
+  <p>以下は特にご意見をいただきたいポイントです（該当箇所を選択してコメントいただけると改善に直結します）。</p>
+  <ul>
+    <li><strong>論点1</strong>: <!-- 迷っている設計・トレードオフ --></li>
+    <li><strong>論点2</strong>: <!-- ... --></li>
+  </ul>
+  <div class="note pt">レビュー後、上部の<strong>「すべて書き出す」</strong>で JSON をダウンロードしてお渡しください。優先度「高」→「中」→「低」の順に改善します。</div>
+</section>
