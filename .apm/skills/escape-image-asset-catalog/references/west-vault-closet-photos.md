@@ -103,17 +103,26 @@ export const vaultCloseupImageAtom = atom((get) =>
 
 ```json
 {
-  "closet-doors":           { "top":  5, "left": 25, "w": 44, "h": 88 },
-  "closet-close-edge-left": { "top":  5, "left": 23, "w":  7, "h": 80 },
-  "closet-close-edge-right":{ "top":  5, "left": 70, "w":  7, "h": 80 },
-  "closet-close-top":       { "top":  0, "left": 25, "w": 50, "h":  8 },
-  "focus-vault":            { "top": 42, "left": 33, "w": 34, "h": 30 }
+  "closet-doors":           { "top":  5, "left": 34, "w": 30, "h": 85 },
+  "closet-close-edge-left": { "top":  2, "left": 30, "w": 10, "h": 92 },
+  "closet-close-edge-right":{ "top":  2, "left": 60, "w": 10, "h": 92 },
+  "closet-close-top":       { "top":  0, "left": 30, "w": 40, "h": 13 },
+  "focus-vault":            { "top": 33, "left": 40, "w": 18, "h": 30 },
+  "focus-rubbing-paper":    { "top": 80, "left": 64, "w": 15, "h": 18 },
+  "collect-qr2":            { "top": 12, "left": 42, "w": 12, "h": 18 }
 }
 ```
+
+> PR #172 で実オブジェクト位置に再配置 (2026-07)。閉扉判定は開いた扉パネル上
+> (左 x≈33〜39% / 右 x≈60〜69%)、金庫は実金庫 x≈41〜57%、凸凹紙は右側の床 x≈66〜74%。
+> z-index: `collect-qr2`(2) > `focus-vault`(1) > その他(0)。
+> 目視確認は `?debug=hotspots` (features/hotspot-debug) で行う。
 
 - `closet-doors` は `closetState === 'closed'` のときのみ active
 - `closet-close-edge-*` / `closet-close-top` は `'open'` または `'open-vault-seen'` のとき active
 - `focus-vault` は `closetState !== 'closed'` のとき active
+- `focus-rubbing-paper` は `closed` かつ `west-rubbing-paper === 'blank'` のとき active
+- `collect-qr2` は open 系かつ qr2 未収集のとき active
 
 ---
 
